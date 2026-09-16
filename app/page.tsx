@@ -36,7 +36,7 @@ const content = {
       {
         title: "Book a Strategy Call",
         subtitle: "Direct phone or Zoom consultation",
-        href: "https://calendly.com/YOUR_CALENDLY_USERNAME/15min",
+        href: "https://calendly.com/listwithbernardo",
         icon: Calendar,
         highlight: true,
       },
@@ -179,7 +179,7 @@ export default function LinkInBioPage() {
 
         {/* Profile Header */}
         <div className="flex flex-col items-center text-center">
-          <div className="relative w-44 h-8 mb-4 opacity-95">
+          <div className="relative w-64 h-24 mb-4 opacity-95">
             <Image
               src="/roa-logo.png"
               alt="Realty of America"
