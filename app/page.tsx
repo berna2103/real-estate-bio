@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { 
@@ -9,8 +10,9 @@ import {
   Phone, 
   Mail, 
   Share2, 
-  Sparkles, 
-  MoreVertical 
+  MoreVertical,
+  Calendar,
+  Languages
 } from "lucide-react";
 
 const playfair = Playfair_Display({ 
@@ -25,38 +27,108 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta"
 });
 
+const content = {
+  en: {
+    tagline: "Strategic guidance. Exceptional real estate results.",
+    sharePrompt: "Connect with Bernardo Jimenez - Licensed Real Estate Broker with Realty of America:",
+    toggleLabel: "Español",
+    links: [
+      {
+        title: "Book a Strategy Call",
+        subtitle: "Direct phone or Zoom consultation",
+        href: "https://calendly.com/YOUR_CALENDLY_USERNAME/15min",
+        icon: Calendar,
+        highlight: true,
+      },
+      {
+        title: "Looking to Buy? Start Here!",
+        subtitle: "Browse featured listings",
+        href: "https://bernardojimenez.realscout.com",
+        icon: Home,
+      },
+      {
+        title: "Search All Available Homes",
+        subtitle: "Custom MLS search portal",
+        href: "https://bernardojimenez.realscout.com/homesearch/listings",
+        icon: Search,
+      },
+      {
+        title: "What is Your Home Worth?",
+        subtitle: "Instant home valuation report",
+        href: "https://bernardojimenez.realscout.com/homesearch/home-reports",
+        icon: DollarSign,
+      },
+      {
+        title: "Contact Me Directly",
+        subtitle: "Call or text • (708) 314-0477",
+        href: "tel:7083140477",
+        icon: Phone,
+      },
+    ],
+    footerLocation: "Chicago, IL • License # 475.218221",
+    footerLegal: "© 2026 Realty of America. Each office is independently owned and operated. Equal Housing Opportunity.",
+  },
+  es: {
+    tagline: "Asesoría estratégica. Resultados excepcionales en bienes raíces.",
+    sharePrompt: "Conecta con Bernardo Jimenez - Corredor de Bienes Raíces con Realty of America:",
+    toggleLabel: "English",
+    links: [
+      {
+        title: "Agenda una Llamada Estratégica",
+        subtitle: "Consulta telefónica o por Zoom",
+        href: "https://calendly.com/YOUR_CALENDLY_USERNAME/15min",
+        icon: Calendar,
+        highlight: true,
+      },
+      {
+        title: "¿Buscas Comprar? ¡Empieza Aquí!",
+        subtitle: "Propiedades destacadas",
+        href: "https://bernardojimenez.realscout.com",
+        icon: Home,
+      },
+      {
+        title: "Buscar Propiedades Disponibles",
+        subtitle: "Portal de búsqueda MLS",
+        href: "https://bernardojimenez.realscout.com/homesearch/listings",
+        icon: Search,
+      },
+      {
+        title: "¿Cuánto Vale tu Propiedad?",
+        subtitle: "Reporte de valuación instantáneo",
+        href: "https://bernardojimenez.realscout.com/homesearch/home-reports",
+        icon: DollarSign,
+      },
+      {
+        title: "Contáctame Directamente",
+        subtitle: "Llamada o mensaje • (708) 314-0477",
+        href: "tel:7083140477",
+        icon: Phone,
+      },
+    ],
+    footerLocation: "Hablo Español • Chicago, IL • Licencia # 475.218221",
+    footerLegal: "© 2026 Realty of America. Cada oficina es de operación independiente. Igualdad de Oportunidades de Vivienda.",
+  },
+};
+
 export default function LinkInBioPage() {
-  const links = [
-    {
-      title: "Looking to Buy? Start Here!",
-      subtitle: "",
-      href: "https://bernardojimenez.realscout.com/onboarding",
-      icon: Home,
-    },
-    {
-      title: "Home Search - Start Here!",
-      subtitle: "",
-      href: "https://bernardojimenez.realscout.com/",
-      icon: Search,
-    },
-    {
-      title: "What is your home worth?",
-      subtitle: "",
-      href: "http://app.cloudcma.com/api_widget/aa79d94dc9b4bf80cd34ae3f7560d5c8/show?post_url=https://app.cloudcma.com&source_url=ua",
-      icon: DollarSign,
-    },
-    {
-      title: "Contact Me!",
-      subtitle: "Contact • Bernardo Jimenez",
-      href: "tel:7083140477",
-      icon: Phone,
-    },
-  ];
+  const [lang, setLang] = useState<"en" | "es">("en");
+
+  // Detect device language on mount
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      const browserLang = navigator.language || (navigator as { userLanguage?: string }).userLanguage || "";
+      if (browserLang.toLowerCase().startsWith("es")) {
+        setLang("es");
+      }
+    }
+  }, []);
+
+  const current = content[lang];
 
   const handleShare = async () => {
     const shareData = {
       title: "Bernardo Jimenez - REALTOR®",
-      text: "Connect with Bernardo Jimenez - Licensed Real Estate Broker with Realty of America:",
+      text: current.sharePrompt,
       url: typeof window !== "undefined" ? window.location.href : "https://barcias.com",
     };
 
@@ -73,6 +145,10 @@ export default function LinkInBioPage() {
     window.location.href = `sms:?&body=${body}`;
   };
 
+  const toggleLanguage = () => {
+    setLang((prev) => (prev === "en" ? "es" : "en"));
+  };
+
   return (
     <main 
       className={`${jakarta.className} ${playfair.variable} min-h-screen bg-[#10295A] text-white antialiased flex flex-col items-center justify-between px-4 py-5 selection:bg-[#DB1263]/30`}
@@ -80,12 +156,16 @@ export default function LinkInBioPage() {
       <div className="w-full max-w-sm mx-auto">
         {/* Top Header Controls */}
         <div className="flex items-center justify-between px-1 mb-3">
-          <div 
-            aria-hidden="true"
-            // className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/15 shadow-sm"
+          {/* Quick Language Switcher Button */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#10295A] text-xs font-semibold backdrop-blur-sm border border-white/15 transition-all duration-200 shadow-sm active:scale-95"
+            aria-label="Toggle language"
           >
-            {/* <Sparkles className="w-3.5 h-3.5 text-[#DB1263]" /> */}
-          </div>
+            <Languages className="w-3.5 h-3.5 text-[#DB1263]" />
+            <span>{current.toggleLabel}</span>
+          </button>
           
           <button 
             type="button"
@@ -97,10 +177,9 @@ export default function LinkInBioPage() {
           </button>
         </div>
 
-        {/* Profile Card Header */}
+        {/* Profile Header */}
         <div className="flex flex-col items-center text-center">
-          {/* Realty of America Brand Logo Header */}
-          <div className="relative w-66 h-22 mb-4 opacity-95">
+          <div className="relative w-44 h-8 mb-4 opacity-95">
             <Image
               src="/roa-logo.png"
               alt="Realty of America"
@@ -127,13 +206,13 @@ export default function LinkInBioPage() {
           </h1>
           
           <p className="text-[12px] text-[#E6E7E8]/85 mt-1 tracking-wide font-light">
-            Your trusted & dedicated local realtor
+            {current.tagline}
           </p>
 
           {/* Social Row */}
           <div className="flex items-center justify-center gap-4 mt-3 mb-5 text-[#E6E7E8]">
             <a
-              href="https://www.facebook.com/listwithbernardo"
+              href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 hover:text-[#1A9175] transition-colors"
@@ -145,7 +224,7 @@ export default function LinkInBioPage() {
             </a>
 
             <a
-              href="https://www.tiktok.com/@listwithbernardo"
+              href="https://tiktok.com"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 hover:text-[#1A9175] transition-colors"
@@ -157,7 +236,7 @@ export default function LinkInBioPage() {
             </a>
 
             <a
-              href="https://www.instagram.com/chicago.realtor2103/"
+              href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 hover:text-[#1A9175] transition-colors"
@@ -187,20 +266,24 @@ export default function LinkInBioPage() {
 
         {/* Compact Action Link Buttons */}
         <div className="space-y-2.5 w-full">
-          {links.map((link) => {
+          {current.links.map((link) => {
             const Icon = link.icon;
             return (
               <a
                 key={link.title}
                 href={link.href}
-                className="group relative flex items-center justify-between w-full min-h-[50px] px-4 py-2.5 rounded-full bg-white hover:bg-[#F1F2F2] transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.98]"
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className={`group relative flex items-center justify-between w-full min-h-[50px] px-4 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.98] ${
+                  link.highlight 
+                    ? "bg-white border-2 border-[#1A9175]" 
+                    : "bg-white hover:bg-[#F1F2F2]"
+                }`}
               >
-                {/* Left Icon */}
                 <div className="w-7 h-7 flex items-center justify-center shrink-0 text-[#1A9175]">
                   <Icon className="w-4 h-4 stroke-[2]" />
                 </div>
 
-                {/* Center Text */}
                 <div className="flex-1 text-center px-2">
                   <span className="text-[13px] font-medium text-[#10295A] tracking-tight block leading-tight">
                     {link.title}
@@ -212,7 +295,6 @@ export default function LinkInBioPage() {
                   )}
                 </div>
 
-                {/* Right Options Icon */}
                 <div className="w-7 h-7 flex items-center justify-center shrink-0 text-[#10295A]/30 group-hover:text-[#10295A]/60 transition">
                   <MoreVertical className="w-3.5 h-3.5" />
                 </div>
@@ -222,9 +304,8 @@ export default function LinkInBioPage() {
         </div>
       </div>
 
-      {/* Footer with Equal Housing Opportunity */}
+      {/* Footer */}
       <footer className="w-full max-w-sm mx-auto mt-8 mb-2 text-center flex flex-col items-center space-y-2">
-        {/* Equal Housing Logo (Vector SVG) */}
         <div 
           className="text-[#E6E7E8]/70 flex flex-col items-center" 
           title="Equal Housing Opportunity"
@@ -236,11 +317,11 @@ export default function LinkInBioPage() {
         </div>
 
         <p className="text-[9.5px] text-[#E6E7E8]/75 font-medium tracking-wider uppercase">
-          Hablo Español • Chicago, IL • License # 475.218221
+          {current.footerLocation}
         </p>
 
         <p className="text-[8.5px] text-[#E6E7E8]/45 leading-relaxed font-light max-w-xs">
-          © 2026 Realty of America. Each office is independently owned and operated. Equal Housing Opportunity.
+          {current.footerLegal}
         </p>
       </footer>
     </main>
