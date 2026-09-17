@@ -223,7 +223,7 @@ export default function LinkInBioPage() {
             </a>
 
             <a
-              href="https://www.tiktok.com/@bernardojimenez"
+              href="https://www.tiktok.com/@listwithbernardo"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 hover:text-[#1A9175] transition-colors"
