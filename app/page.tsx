@@ -43,13 +43,13 @@ const content = {
       {
         title: "Looking to Buy? Start Here!",
         subtitle: "Browse featured listings",
-        href: "https://bernardojimenez.realscout.com",
+        href: "https://bernardojimenez.realscout.com/",
         icon: Home,
       },
       {
         title: "Search All Available Homes",
         subtitle: "Custom MLS search portal",
-        href: "https://bernardojimenez.realscout.com/homesearch/listings",
+        href: "https://bernardojimenez.realscout.com/onboarding",
         icon: Search,
       },
       {
@@ -89,7 +89,7 @@ const content = {
       {
         title: "Buscar Propiedades Disponibles",
         subtitle: "Portal de búsqueda MLS",
-        href: "https://bernardojimenez.realscout.com/homesearch/listings",
+        href: "https://bernardojimenez.realscout.com/onboarding",
         icon: Search,
       },
       {
@@ -211,7 +211,7 @@ export default function LinkInBioPage() {
           {/* Social Row */}
           <div className="flex items-center justify-center gap-4 mt-3 mb-5 text-[#E6E7E8]">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/listwithbernardo"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 hover:text-[#1A9175] transition-colors"
@@ -223,7 +223,7 @@ export default function LinkInBioPage() {
             </a>
 
             <a
-              href="https://tiktok.com"
+              href="https://www.tiktok.com/@bernardojimenez"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 hover:text-[#1A9175] transition-colors"
@@ -235,7 +235,7 @@ export default function LinkInBioPage() {
             </a>
 
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/chicago.realtor2103"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 hover:text-[#1A9175] transition-colors"
