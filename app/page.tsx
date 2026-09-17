@@ -76,7 +76,7 @@ const content = {
       {
         title: "Agenda una Llamada Estratégica",
         subtitle: "Consulta telefónica o por Zoom",
-        href: "https://calendly.com/YOUR_CALENDLY_USERNAME/15min",
+        href: "https://calendly.com/listwithbernardo/30min",
         icon: Calendar,
         highlight: true,
       },
@@ -113,7 +113,6 @@ const content = {
 export default function LinkInBioPage() {
   const [lang, setLang] = useState<"en" | "es">("en");
 
-  // Detect device language on mount
   useEffect(() => {
     if (typeof navigator !== "undefined") {
       const browserLang = navigator.language || (navigator as { userLanguage?: string }).userLanguage || "";
@@ -156,11 +155,10 @@ export default function LinkInBioPage() {
       <div className="w-full max-w-sm mx-auto">
         {/* Top Header Controls */}
         <div className="flex items-center justify-between px-1 mb-3">
-          {/* Quick Language Switcher Button */}
           <button
             type="button"
             onClick={toggleLanguage}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#10295A] text-xs font-semibold backdrop-blur-sm border border-white/15 transition-all duration-200 shadow-sm active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#10295A] text-[13px] font-semibold backdrop-blur-sm border border-white/15 transition-all duration-200 shadow-sm active:scale-95"
             aria-label="Toggle language"
           >
             <Languages className="w-3.5 h-3.5 text-[#DB1263]" />
@@ -179,12 +177,13 @@ export default function LinkInBioPage() {
 
         {/* Profile Header */}
         <div className="flex flex-col items-center text-center">
-          <div className="relative w-64 h-24 mb-4 opacity-95">
+          {/* Sized-up ROA Banner */}
+          <div className="relative w-72 h-14 mb-3 opacity-95">
             <Image
               src="/roa-logo.png"
               alt="Realty of America"
               fill
-              sizes="176px"
+              sizes="288px"
               priority
               className="object-contain"
             />
@@ -201,11 +200,11 @@ export default function LinkInBioPage() {
             />
           </div>
 
-          <h1 className="font-['Playfair_Display'] text-lg sm:text-xl font-semibold tracking-wide text-white">
-            Bernardo Jimenez <span className="text-xs font-normal tracking-normal text-[#E6E7E8]/80 font-sans">REALTOR®</span>
+          <h1 className="font-['Playfair_Display'] text-xl sm:text-2xl font-semibold tracking-wide text-white">
+            Bernardo Jimenez <span className="text-[13px] font-normal tracking-normal text-[#E6E7E8]/80 font-sans">REALTOR®</span>
           </h1>
           
-          <p className="text-[12px] text-[#E6E7E8]/85 mt-1 tracking-wide font-light">
+          <p className="text-[13px] text-[#E6E7E8]/90 mt-1 tracking-wide font-light max-w-[280px]">
             {current.tagline}
           </p>
 
@@ -218,7 +217,7 @@ export default function LinkInBioPage() {
               className="p-1 hover:text-[#1A9175] transition-colors"
               aria-label="Facebook"
             >
-              <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
             </a>
@@ -230,7 +229,7 @@ export default function LinkInBioPage() {
               className="p-1 hover:text-[#1A9175] transition-colors"
               aria-label="TikTok"
             >
-              <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.27 6.27 0 0 0 1.86-4.46V8.78a8.2 8.2 0 0 0 4.91 1.62v-3.71z"/>
               </svg>
             </a>
@@ -243,7 +242,7 @@ export default function LinkInBioPage() {
               aria-label="Instagram"
             >
               <svg
-                className="w-4.5 h-4.5 stroke-current fill-none stroke-2"
+                className="w-5 h-5 stroke-current fill-none stroke-2"
                 viewBox="0 0 24 24"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -259,12 +258,12 @@ export default function LinkInBioPage() {
               className="p-1 hover:text-[#1A9175] transition-colors"
               aria-label="Email"
             >
-              <Mail className="w-4.5 h-4.5" />
+              <Mail className="w-5 h-5" />
             </a>
           </div>
         </div>
 
-        {/* Compact Action Link Buttons */}
+        {/* Action Link Buttons */}
         <div className="space-y-2.5 w-full">
           {current.links.map((link) => {
             const Icon = link.icon;
@@ -274,29 +273,29 @@ export default function LinkInBioPage() {
                 href={link.href}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`group relative flex items-center justify-between w-full min-h-[50px] px-4 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.98] ${
+                className={`group relative flex items-center justify-between w-full min-h-[54px] px-4 py-3 rounded-full transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.98] ${
                   link.highlight 
                     ? "bg-white border-2 border-[#1A9175]" 
                     : "bg-white hover:bg-[#F1F2F2]"
                 }`}
               >
                 <div className="w-7 h-7 flex items-center justify-center shrink-0 text-[#1A9175]">
-                  <Icon className="w-4 h-4 stroke-[2]" />
+                  <Icon className="w-[18px] h-[18px] stroke-[2]" />
                 </div>
 
                 <div className="flex-1 text-center px-2">
-                  <span className="text-[13px] font-medium text-[#10295A] tracking-tight block leading-tight">
+                  <span className="text-[14.5px] font-semibold text-[#10295A] tracking-tight block leading-tight">
                     {link.title}
                   </span>
                   {link.subtitle && (
-                    <span className="text-[10px] text-[#10295A]/60 block mt-0.5 font-normal">
+                    <span className="text-[11.5px] text-[#10295A]/70 block mt-0.5 font-normal">
                       {link.subtitle}
                     </span>
                   )}
                 </div>
 
                 <div className="w-7 h-7 flex items-center justify-center shrink-0 text-[#10295A]/30 group-hover:text-[#10295A]/60 transition">
-                  <MoreVertical className="w-3.5 h-3.5" />
+                  <MoreVertical className="w-4 h-4" />
                 </div>
               </a>
             );
@@ -316,11 +315,11 @@ export default function LinkInBioPage() {
           </svg>
         </div>
 
-        <p className="text-[9.5px] text-[#E6E7E8]/75 font-medium tracking-wider uppercase">
+        <p className="text-[10.5px] text-[#E6E7E8]/85 font-medium tracking-wider uppercase">
           {current.footerLocation}
         </p>
 
-        <p className="text-[8.5px] text-[#E6E7E8]/45 leading-relaxed font-light max-w-xs">
+        <p className="text-[9.5px] text-[#E6E7E8]/50 leading-relaxed font-light max-w-xs">
           {current.footerLegal}
         </p>
       </footer>
