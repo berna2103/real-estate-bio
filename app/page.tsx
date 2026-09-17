@@ -36,7 +36,7 @@ const content = {
       {
         title: "Book a Strategy Call",
         subtitle: "Direct phone or Zoom consultation",
-        href: "https://calendly.com/listwithbernardo",
+        href: "https://calendly.com/listwithbernardo/30min",
         icon: Calendar,
         highlight: true,
       },
