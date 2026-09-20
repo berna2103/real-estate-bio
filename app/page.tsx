@@ -11,13 +11,11 @@ import {
   Phone, 
   Mail, 
   Share2, 
-  MoreVertical,
   Calendar,
   Languages,
   Building2,
   ArrowUpRight,
   MessageSquare,
-  ShieldCheck,
   Sparkles
 } from "lucide-react";
 
@@ -217,7 +215,7 @@ export default function LinkInBioPage() {
       />
 
       <main 
-        className={`${jakarta.className} ${playfair.variable} min-h-screen bg-[#0d1f42] bg-gradient-to-b from-[#10295A] via-[#0d224b] to-[#09152b] relative text-white antialiased flex flex-col justify-between px-3 sm:px-6 lg:px-12 py-4 sm:py-8 selection:bg-[#1A9175]/40 overflow-x-hidden`}
+        className={`${jakarta.className} ${playfair.variable} min-h-screen bg-[#0d1f42] bg-gradient-to-b from-[#10295A] via-[#0d224b] to-[#09152b] relative text-white antialiased flex flex-col justify-between px-3 sm:px-6 lg:px-12 py-4 sm:py-8 selection:bg-[#1A9175]/40`}
       >
         {/* Ambient Subtle Gradients for Desktop */}
         <div className="hidden lg:block absolute -top-20 left-1/4 w-[40rem] h-[40rem] bg-[#1A9175]/10 rounded-full blur-[140px] pointer-events-none -z-10" />
@@ -245,12 +243,12 @@ export default function LinkInBioPage() {
           </button>
         </header>
 
-        {/* Master Responsive Layout */}
+        {/* Responsive Grid: Single column on mobile, sticky dual-column layout on laptop/desktop */}
         <div className="w-full max-w-sm lg:max-w-6xl mx-auto lg:grid lg:grid-cols-12 lg:gap-8 lg:items-start space-y-4 lg:space-y-0">
           
-          {/* LEFT COLUMN: Profile & Action Hub */}
-          <section className="lg:col-span-5 lg:sticky lg:top-8 space-y-3 sm:space-y-4">
-            <div className="w-full bg-white/[0.05] backdrop-blur-2xl rounded-[2.25rem] sm:rounded-[2.75rem] p-5 sm:p-7 border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.45)] relative overflow-hidden">
+          {/* LEFT COLUMN: Sticky Floating Bio Card */}
+          <section className="lg:col-span-5 lg:sticky lg:top-8 lg:self-start space-y-3 sm:space-y-4">
+            <div className="w-full bg-white/[0.05] backdrop-blur-2xl rounded-[2.25rem] sm:rounded-[2.75rem] p-5 sm:p-7 border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.45)] relative overflow-hidden transition-all duration-300">
               {/* Subtle Card Glow Highlight */}
               <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-[#1A9175]/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -299,7 +297,7 @@ export default function LinkInBioPage() {
                   {current.tagline}
                 </p>
 
-                {/* Quick Contact Bar (Call / Text / Email) */}
+                {/* Quick Contact Bar */}
                 <div className="grid grid-cols-3 gap-2 w-full mt-4 mb-4 pt-4 border-t border-white/10">
                   <a
                     href="tel:7083140477"
@@ -416,7 +414,7 @@ export default function LinkInBioPage() {
             </div>
           </section>
 
-          {/* RIGHT COLUMN: RealScout Valuations & Office Listings */}
+          {/* RIGHT COLUMN: Interactive RealScout Widgets */}
           <section className="lg:col-span-7 space-y-4">
             
             {/* Mobile Divider (Hidden on Desktop) */}
