@@ -420,16 +420,20 @@ export default function LuxuryRealEstatePage() {
             </div>
 
             {/* Embedded Carousel Web Component */}
+            
             <div className="w-full bg-white/5 rounded-2xl p-4 sm:p-6 border border-white/10">
               {/* @ts-expect-error - RealScout custom office listings web component */}
+              
               <realscout-office-listings 
-  agent-encoded-id="QWdlbnQtMzA4MjQ0" 
-  cities="Chicago,Berwyn,Calumet City"
-  sort-order="NEWEST" 
-  listing-status="For Sale" 
-  property-types="SFR,MF,TC" 
-  include-seller-listings>
-</realscout-office-listings>
+                  agent-encoded-id="QWdlbnQtMzA4MjQ0" 
+                  cities="Chicago,Berwyn,Calumet City"
+                  sort-order="NEWEST" 
+                  listing-status="For Sale" 
+                  property-types="SFR,MF,TC" 
+                  include-seller-listings>
+               {/* @ts-expect-error - RealScout custom office listings web component */}
+              
+                </realscout-office-listings>
             </div>
 
           </div>
