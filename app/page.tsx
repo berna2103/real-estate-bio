@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Script from "next/script";
+import Link from "next/link";
 import { Gilda_Display, Jost } from "next/font/google";
 import { 
   Building2, 
@@ -12,7 +13,8 @@ import {
   MessageSquare, 
   Calendar,
   Menu,
-  X
+  X,
+  BookOpen
 } from "lucide-react";
 
 const gilda = Gilda_Display({
@@ -29,6 +31,8 @@ const jost = Jost({
 
 const content = {
   en: {
+    brokerTitle: "Bernardo Jimenez",
+    brokerSub: "Realty of America",
     taglineSubtitle: "Bernardo Jimenez · Realty of America",
     heroHeading: "Chicago\nReal Estate",
     heroText: "Thoughtful guidance for buying and selling across Chicago and its surrounding suburbs. In English and Spanish.",
@@ -36,14 +40,15 @@ const content = {
     btnExplore: "Explore homes",
     badgeLocation: "Chicago · Illinois",
     navAbout: "About",
+    navBlog: "Journal",
     navMarkets: "Markets",
     navSearch: "Home Search",
     navValuation: "Valuation",
     navTalk: "Let’s talk",
     toggleLabel: "Español",
-    cmaBadge: "A considered approach",
+    cmaBadge: "My approach",
     cmaTitle: "A better way to make your next move.",
-    cmaText: "Every decision begins with listening. Bernardo brings local knowledge, practical strategy, and steady communication to the moments that matter.",
+    cmaText: "Every decision begins with listening. I bring local market insight, practical strategy, and steady communication to every step of your journey.",
     valuationBoxTitle: "Request a Thoughtful Valuation",
     valuationBoxSubtitle: "Enter your address below for an instant property assessment",
     featuredBadge: "The places we know",
@@ -51,44 +56,47 @@ const content = {
     featuredSubtitle: "Explore premier residential opportunities throughout Chicago and the surrounding suburbs.",
     btnAllListings: "View All Properties on MLS",
     aboutBadge: "Meet your broker",
-    aboutHeading: "Bernardo Jimenez",
-    aboutLead: "A Chicago-area broker who believes clarity is the beginning of every good decision.",
-    aboutBody: "With an MBA and a practical, attentive approach, Bernardo works closely with residential buyers and sellers from the city to the surrounding suburbs. The conversation is always personal. The plan is always yours.",
-    aboutLic: "English & Spanish · Illinois Licensed Broker # 475.218221",
+    aboutHeading: "Hi, I’m Bernardo.",
+    aboutLead: "I believe clarity, patience, and direct communication are the foundation of every great decision.",
+    aboutBody: "With an MBA and a practical, hands-on advisory style, I work closely with residential buyers and sellers throughout Chicago and the nearby suburbs. My goal is simple: provide honest counsel, eliminate guesswork, and help you negotiate from a position of strength.",
+    aboutLic: "Bilingual (English & Spanish) · Illinois Licensed Broker # 475.218221",
     ctaHeading: "Good moves begin with a conversation.",
-    ctaBody: "Whether you are thinking of selling or ready to find a place of your own, begin with a conversation grounded in your goals.",
-    bookCall: "Schedule a 30-Min Strategy Call",
+    ctaBody: "Whether you are planning to sell your home or looking for the right place to put down roots, let’s talk through your goals together.",
+    bookCall: "Schedule a 30-Min Strategy Call with Me",
   },
   es: {
+    brokerTitle: "Bernardo Jimenez",
+    brokerSub: "Realty of America",
     taglineSubtitle: "Bernardo Jimenez · Realty of America",
     heroHeading: "Bienes Raíces\nen Chicago",
     heroText: "Asesoría estratégica y transparente para comprar y vender en Chicago y sus suburbios. En inglés y español.",
     btnStart: "Iniciar conversación",
     btnExplore: "Explorar propiedades",
     badgeLocation: "Chicago · Illinois",
-    navAbout: "Acerca de",
+    navAbout: "Acerca de mí",
+    navBlog: "Artículos",
     navMarkets: "Mercados",
     navSearch: "Búsqueda",
     navValuation: "Valuación",
     navTalk: "Contáctame",
     toggleLabel: "English",
-    cmaBadge: "Un enfoque estratégico",
+    cmaBadge: "Mi enfoque de trabajo",
     cmaTitle: "Una mejor manera de dar tu siguiente paso.",
-    cmaText: "Cada decisión comienza escuchando. Bernardo aporta conocimiento del mercado local, estrategia práctica y comunicación constante.",
+    cmaText: "Cada decisión comienza escuchando. Aporto conocimiento del mercado local, estrategia práctica y comunicación constante en cada etapa.",
     valuationBoxTitle: "Calcula el Valor de tu Propiedad",
     valuationBoxSubtitle: "Ingresa tu dirección para recibir un reporte de mercado en tiempo real",
     featuredBadge: "Los lugares que conocemos",
     featuredTitle: "Propiedades Destacadas de la Oficina",
     featuredSubtitle: "Explora oportunidades residenciales exclusivas en Chicago y áreas conurbadas.",
     btnAllListings: "Ver Todas las Propiedades en MLS",
-    aboutBadge: "Conoce a tu corredor",
-    aboutHeading: "Bernardo Jimenez",
-    aboutLead: "Un profesional que cree que la claridad es el punto de partida de toda buena decisión.",
-    aboutBody: "Con una maestría en administración de empresas (MBA) y un enfoque práctico y personalizado, Bernardo guía a compradores y vendedores residenciales con absoluta dedicación.",
-    aboutLic: "Hablo Español · Licencia de Illinois # 475.218221",
+    aboutBadge: "Tu asesor de confianza",
+    aboutHeading: "Hola, soy Bernardo.",
+    aboutLead: "Creo firmemente que la claridad y la comunicación directa son el punto de partida de toda buena decisión.",
+    aboutBody: "Con una maestría en administración (MBA) y un enfoque cercano y analítico, acompaño a compradores y vendedores en Chicago y los suburbios vecinos. Mi compromiso es brindarte orientación honesta, proteger tu patrimonio y diseñar un plan adaptado 100% a tus metas.",
+    aboutLic: "Totalmente bilingüe (Inglés y Español) · Licencia de Illinois # 475.218221",
     ctaHeading: "Las mejores decisiones comienzan con una plática.",
-    ctaBody: "Ya sea que estés pensando en vender o listo para encontrar tu nuevo hogar, comencemos con una conversación centrada en tus metas.",
-    bookCall: "Agenda una Llamada Estratégica (30 Min)",
+    ctaBody: "Ya sea que estés pensando en vender tu propiedad o listo para comprar tu nuevo hogar, platiquemos directamente sobre tus planes.",
+    bookCall: "Agenda una Llamada Estratégica Conmigo (30 Min)",
   }
 };
 
@@ -118,7 +126,7 @@ export default function LuxuryRealEstatePage() {
 
       <div className={`${gilda.variable} ${jost.variable} font-sans bg-[#f7f5f0] text-[#16242c] selection:bg-[#a89078]/30 min-h-screen flex flex-col`}>
         
-        {/* HEADER / NAVIGATION WITH ELEGANT MICRO-AVATAR LOCKUP */}
+        {/* HEADER / NAVIGATION WITH PROPER BLOG LINK */}
         <header className="fixed inset-x-0 top-0 z-50 bg-[#16242c]/95 backdrop-blur-md border-b border-[#2a3840] text-[#f7f5f0] transition-all">
           <div className="mx-auto flex h-20 max-w-[1700px] items-center justify-between gap-6 px-6 md:px-12 lg:px-20">
             
@@ -133,10 +141,10 @@ export default function LuxuryRealEstatePage() {
               </div>
               <div className="flex flex-col leading-none">
                 <span className="font-['Gilda_Display'] text-[21px] md:text-[23px] tracking-tight text-white group-hover:text-[#c4a98b] transition-colors duration-300">
-                  Bernardo Jimenez
+                  {t.brokerTitle}
                 </span>
                 <span className="mt-1 text-[9px] uppercase tracking-[0.24em] text-[#a5b0b5]">
-                  Realty of America
+                  {t.brokerSub}
                 </span>
               </div>
             </a>
@@ -146,13 +154,16 @@ export default function LuxuryRealEstatePage() {
               <a href="#about" className="text-[11px] uppercase tracking-[0.18em] text-[#f7f5f0] hover:text-[#c4a98b] transition-colors">
                 {t.navAbout}
               </a>
+              <Link href="/blog" className="text-[11px] uppercase tracking-[0.18em] text-[#f7f5f0] hover:text-[#c4a98b] transition-colors">
+                {t.navBlog}
+              </Link>
               <a href="https://bernardojimenez.realscout.com/onboarding" target="_blank" rel="noopener noreferrer" className="text-[11px] uppercase tracking-[0.18em] text-[#f7f5f0] hover:text-[#c4a98b] transition-colors">
                 {t.navSearch}
               </a>
               <a href="#valuation" className="text-[11px] uppercase tracking-[0.18em] text-[#f7f5f0] hover:text-[#c4a98b] transition-colors">
                 {t.navValuation}
               </a>
-              <a href="https://calendly.com/listwithbernardo/30min" target="_blank" rel="noopener noreferrer" className="border-b border-[#f7f5f0] pb-0.5 text-[11px] uppercase tracking-[0.18em] text-white hover:text-[#c4a98b] hover:border-[#c4a98b] transition-colors">
+              <a href="/contact" className="border-b border-[#f7f5f0] pb-0.5 text-[11px] uppercase tracking-[0.18em] text-white hover:text-[#c4a98b] hover:border-[#c4a98b] transition-colors">
                 {t.navTalk}
               </a>
 
@@ -169,8 +180,8 @@ export default function LuxuryRealEstatePage() {
               <a 
                 href="mailto:bernardo.jimenez@realtyofamerica.com"
                 className="p-2 rounded-full border border-white/20 text-white hover:bg-white/10 hover:text-[#c4a98b] transition-colors"
-                title="Email Bernardo"
-                aria-label="Email Bernardo"
+                title="Email Bernardo directly"
+                aria-label="Email Bernardo directly"
               >
                 <Mail className="w-3.5 h-3.5" />
               </a>
@@ -220,14 +231,15 @@ export default function LuxuryRealEstatePage() {
           {mobileMenuOpen && (
             <div className="lg:hidden bg-[#16242c] border-b border-[#2a3840] px-6 py-6 space-y-4 text-sm uppercase tracking-widest text-center">
               <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-white/90">{t.navAbout}</a>
+              <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-[#c4a98b] font-medium">{t.navBlog}</Link>
               <a href="https://bernardojimenez.realscout.com/onboarding" target="_blank" rel="noopener noreferrer" className="block py-2 text-white/90">{t.navSearch}</a>
               <a href="#valuation" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-white/90">{t.navValuation}</a>
-              <a href="https://calendly.com/listwithbernardo/30min" target="_blank" rel="noopener noreferrer" className="block py-2 text-[#c4a98b] font-medium">{t.navTalk}</a>
+              <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-white/90">{t.navTalk}</a>
             </div>
           )}
         </header>
 
-        {/* HERO SECTION WITH CINEMATIC VIDEO (NO HEADSHOT OVERKILL) */}
+        {/* HERO SECTION WITH CINEMATIC VIDEO */}
         <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-[#16242c] text-white">
           <video 
             className="absolute inset-0 h-full w-full object-cover"
@@ -289,13 +301,13 @@ export default function LuxuryRealEstatePage() {
                     className="flex items-center gap-1.5 hover:text-[#c4a98b] transition-colors"
                   >
                     <Mail className="w-3.5 h-3.5 text-[#c4a98b]" />
-                    <span>Email</span>
+                    <span>Email Me</span>
                   </a>
                 </div>
 
                 <div className="flex items-center gap-3 text-white/70">
                   <a 
-                    href="https://www.instagram.com/thechicagorealtor" 
+                    href="https://www.instagram.com/bernardo.thechicagorealtor" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="hover:text-white transition-colors"
@@ -396,13 +408,11 @@ export default function LuxuryRealEstatePage() {
               </div>
 
               <div id="realscout-home-value-widget" className="w-full flex justify-center">
-             {/* @ts-expect-error Custom RealScout web component is not included in JSX type definitions. */}
-              
+                {/* @ts-expect-error Custom RealScout web component is not included in JSX intrinsic element typings. */}
+             
                 <realscout-home-value 
                   agent-encoded-id="QWdlbnQtMzA4MjQ0" 
                   include-phone 
-                  include-name
-                  include-email
                   remove-subtitle
                 />
               </div>
@@ -441,7 +451,7 @@ export default function LuxuryRealEstatePage() {
 
             {/* Embedded Carousel Web Component */}
             <div className="w-full bg-white/5 rounded-2xl p-4 sm:p-6 border border-white/10">
-              {/* @ts-expect-error Custom RealScout web component is not included in JSX type definitions. */}
+              {/* @ts-expect-error Custom RealScout web component is not included in JSX intrinsic element typings. */}
               <realscout-office-listings 
                 agent-encoded-id="QWdlbnQtMzA4MjQ0" 
                 cities="Chicago,Berwyn,Calumet City"
@@ -455,7 +465,7 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
-        {/* ABOUT BERNARDO SECTION */}
+        {/* ABOUT SECTION (FIRST-PERSON EDITORIAL TONE) */}
         <section id="about" className="py-20 md:py-32 bg-[#f7f5f0] text-[#16242c]">
           <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-16 lg:px-12">
             
@@ -533,7 +543,7 @@ export default function LuxuryRealEstatePage() {
                     href="mailto:bernardo.jimenez@realtyofamerica.com"
                     className="border border-[#16242c] bg-[#16242c] px-6 py-4 text-[11px] uppercase tracking-[0.14em] text-white hover:bg-transparent hover:text-[#16242c] transition-colors"
                   >
-                    Email Bernardo
+                    Email Me Directly
                   </a>
                   <a 
                     href="https://calendly.com/listwithbernardo/30min"
@@ -549,7 +559,7 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
-        {/* FOOTER */}
+        {/* FOOTER WITH PROPER BLOG LINK & UPDATED INSTAGRAM */}
         <footer className="bg-[#16242c] text-[#f7f5f0] pt-20 pb-10 border-t border-[#2a3840]">
           <div className="mx-auto max-w-[1700px] px-6 md:px-12 lg:px-20">
             <div className="grid gap-12 border-b border-[#2a3840] pb-16 md:grid-cols-[1.4fr_0.6fr_0.6fr]">
@@ -569,7 +579,8 @@ export default function LuxuryRealEstatePage() {
               <div>
                 <p className="mb-5 text-[10px] uppercase tracking-[0.2em] text-[#a5b0b5]">Explore</p>
                 <div className="flex flex-col gap-3 text-sm text-[#f7f5f0]/80">
-                  <a href="#about" className="hover:text-white">About Bernardo</a>
+                  <a href="#about" className="hover:text-white">About Me</a>
+                  <Link href="/blog" className="text-[#c4a98b] hover:text-white font-medium">Real Estate Journal (Blog)</Link>
                   <a href="https://bernardojimenez.realscout.com/onboarding" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home Search (MLS)</a>
                   <a href="#valuation" className="hover:text-white">Instant Home Valuation</a>
                   <a href="https://calendly.com/listwithbernardo/30min" target="_blank" rel="noopener noreferrer" className="hover:text-white">Schedule 30-Min Call</a>
@@ -581,7 +592,7 @@ export default function LuxuryRealEstatePage() {
                 <div className="flex flex-col gap-3 text-sm text-[#f7f5f0]/80">
                   <a href="https://www.facebook.com/listwithbernardo" target="_blank" rel="noopener noreferrer" className="hover:text-white">Facebook</a>
                   <a href="https://www.tiktok.com/@listwithbernardo" target="_blank" rel="noopener noreferrer" className="hover:text-white">TikTok</a>
-                  <a href="https://www.instagram.com/chicago.realtor2103" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</a>
+                  <a href="https://www.instagram.com/bernardo.thechicagorealtor" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</a>
                 </div>
               </div>
             </div>
