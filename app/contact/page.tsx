@@ -144,27 +144,27 @@ export default function ContactBioCardPage() {
 
   return (
     <main 
-      className={`${jost.variable} ${gilda.variable} font-sans h-[100dvh] max-h-[100dvh] overflow-hidden bg-[#16242c] bg-gradient-to-b from-[#16242c] via-[#101b22] to-[#0a1115] text-[#f7f5f0] antialiased flex flex-col justify-between px-3 sm:px-4 py-2.5 sm:py-3.5 selection:bg-[#c4a98b]/30`}
+      className={`${jost.variable} ${gilda.variable} font-sans h-[100dvh] max-h-[100dvh] overflow-hidden bg-[#16242c] bg-gradient-to-b from-[#16242c] via-[#101b22] to-[#0a1115] text-[#f7f5f0] antialiased flex flex-col justify-between px-3 sm:px-4 py-2 sm:py-3 selection:bg-[#c4a98b]/30`}
     >
       <div className="w-full max-w-sm mx-auto flex flex-col h-full justify-between">
         
         {/* Top Minimal Bar */}
-        <div className="flex items-center justify-between px-1 shrink-0 h-8">
+        <div className="flex items-center justify-between px-1 shrink-0 h-9">
           <a
             href="/"
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#16242c] text-[11px] font-medium border border-white/15 transition-all shadow-sm active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#16242c] text-xs font-medium border border-white/15 transition-all shadow-sm active:scale-95"
           >
-            <ArrowLeft className="w-3 h-3" />
+            <ArrowLeft className="w-3.5 h-3.5" />
             <span>{current.backHome}</span>
           </a>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setLang(lang === "en" ? "es" : "en")}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#16242c] text-[11px] font-medium border border-white/15 transition-all shadow-sm active:scale-95 cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#16242c] text-xs font-medium border border-white/15 transition-all shadow-sm active:scale-95 cursor-pointer"
             >
-              <Languages className="w-3 h-3 text-[#c4a98b]" />
+              <Languages className="w-3.5 h-3.5 text-[#c4a98b]" />
               <span>{current.toggleLabel}</span>
             </button>
 
@@ -172,32 +172,32 @@ export default function ContactBioCardPage() {
               type="button"
               onClick={handleShare}
               aria-label="Share contact card"
-              className="w-7 h-7 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#16242c] flex items-center justify-center border border-white/15 transition-all shadow-sm active:scale-95 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white text-white hover:text-[#16242c] flex items-center justify-center border border-white/15 transition-all shadow-sm active:scale-95 cursor-pointer"
             >
-              <Share2 className="w-3 h-3" />
+              <Share2 className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
-        {/* Executive Link-In-Bio Card (Fills height without scrolling) */}
-        <div className="w-full flex-1 flex flex-col justify-evenly bg-white/[0.05] backdrop-blur-2xl rounded-[2rem] p-3.5 sm:p-4 border border-white/15 shadow-[0_15px_40px_rgba(0,0,0,0.5)] my-1.5 overflow-hidden">
+        {/* Executive Link-In-Bio Card */}
+        <div className="w-full flex-1 flex flex-col justify-center bg-white/[0.05] backdrop-blur-2xl rounded-[2.25rem] px-4 py-3.5 sm:px-5 sm:py-4 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)] my-1.5 overflow-hidden">
           
           {/* Profile Header Block */}
           <div className="flex flex-col items-center text-center shrink-0">
             {/* ROA Logo */}
-            <div className="relative w-44 h-8 mb-1 opacity-95">
+            <div className="relative w-48 h-8 mb-1.5 opacity-95">
               <Image
                 src="/roa-logo.png"
                 alt="Realty of America"
                 fill
-                sizes="176px"
+                sizes="192px"
                 priority
                 className="object-contain"
               />
             </div>
 
             {/* Profile Avatar */}
-            <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full overflow-hidden shadow-xl border-2 border-white/90 mb-1 ring-2 ring-[#c4a98b]/40">
+            <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-xl border-2 border-white/90 mb-1.5 ring-2 ring-[#c4a98b]/40">
               <img
                 src="https://dealjoy-cdn-dydre3ftcse4a9ap.z01.azurefd.net/preview-sites/bd09618a-b933-45b9-217f-08df1a5e6eb3/images/e60545aa-09d2-431e-80ec-da138ef82493.png"
                 alt="Bernardo Jimenez"
@@ -205,47 +205,47 @@ export default function ContactBioCardPage() {
               />
             </div>
 
-            <h1 className="font-['Gilda_Display'] text-lg sm:text-xl font-bold tracking-tight text-white leading-tight">
+            <h1 className="font-['Gilda_Display'] text-xl font-bold tracking-tight text-white leading-tight">
               Bernardo Jimenez
             </h1>
 
-            <div className="mt-0.5 px-2.5 py-0.2 rounded-full bg-[#c4a98b]/20 border border-[#c4a98b]/30 text-[#e4d4c3] text-[9.5px] font-medium tracking-wide">
+            <div className="mt-0.5 px-2.5 py-0.5 rounded-full bg-[#c4a98b]/20 border border-[#c4a98b]/30 text-[#e4d4c3] text-[10px] font-medium tracking-wide">
               {current.badge}
             </div>
 
-            <p className="text-[11px] text-[#a5b0b5] mt-1 max-w-[260px] leading-tight font-light line-clamp-1">
+            <p className="text-[11px] text-[#a5b0b5] mt-1 max-w-[270px] leading-tight font-light">
               {current.tagline}
             </p>
 
             {/* 3-Button Fast Contact Row */}
-            <div className="grid grid-cols-3 gap-1.5 w-full mt-2 pt-2 border-t border-white/10">
+            <div className="grid grid-cols-3 gap-2 w-full mt-2.5 pt-2 border-t border-white/10">
               <a
                 href="tel:7083140477"
-                className="flex items-center justify-center gap-1.5 py-1.5 px-1 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white transition active:scale-95"
+                className="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white transition active:scale-95"
               >
                 <Phone className="w-3.5 h-3.5 text-[#c4a98b]" />
-                <span className="text-[10.5px] font-medium">{current.call}</span>
+                <span className="text-[11px] font-medium">{current.call}</span>
               </a>
 
               <a
                 href="sms:7083140477"
-                className="flex items-center justify-center gap-1.5 py-1.5 px-1 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white transition active:scale-95"
+                className="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white transition active:scale-95"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-[10.5px] font-medium">{current.text}</span>
+                <span className="text-[11px] font-medium">{current.text}</span>
               </a>
 
               <a
                 href="mailto:bernardo.jimenez@realtyofamerica.com"
-                className="flex items-center justify-center gap-1.5 py-1.5 px-1 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white transition active:scale-95"
+                className="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white transition active:scale-95"
               >
                 <Mail className="w-3.5 h-3.5 text-sky-400" />
-                <span className="text-[10.5px] font-medium">{current.email}</span>
+                <span className="text-[11px] font-medium">{current.email}</span>
               </a>
             </div>
 
             {/* Social Icons Bar */}
-            <div className="flex items-center justify-center gap-4 mt-2 text-[#f7f5f0]/80">
+            <div className="flex items-center justify-center gap-5 mt-2.5 mb-3 text-[#f7f5f0]/80">
               <a 
                 href="https://www.facebook.com/listwithbernardo" 
                 target="_blank" 
@@ -284,8 +284,8 @@ export default function ContactBioCardPage() {
             </div>
           </div>
 
-          {/* Action Links Stack (Proportionally Spaced) */}
-          <div className="space-y-1.5 w-full my-auto">
+          {/* Action Links Stack with Consistent Proportional Spacing */}
+          <div className="space-y-2.5 w-full">
             {current.links.map((link) => {
               const Icon = link.icon;
               return (
@@ -294,22 +294,22 @@ export default function ContactBioCardPage() {
                   href={link.href}
                   target={link.href.startsWith("http") ? "_blank" : undefined}
                   rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className={`group relative flex items-center justify-between w-full h-11 px-3.5 rounded-xl transition-all duration-200 shadow-sm active:scale-[0.98] ${
+                  className={`group relative flex items-center justify-between w-full min-h-[48px] px-3.5 py-2 rounded-2xl transition-all duration-200 shadow-sm active:scale-[0.98] ${
                     link.highlight 
                       ? "bg-white border-2 border-[#c4a98b] text-[#16242c]" 
                       : "bg-white hover:bg-[#f7f5f0] text-[#16242c]"
                   }`}
                 >
-                  <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 text-[#16242c] bg-[#16242c]/5">
+                  <div className="w-7 h-7 rounded-xl flex items-center justify-center shrink-0 text-[#16242c] bg-[#16242c]/5">
                     <Icon className="w-3.5 h-3.5 stroke-[2]" />
                   </div>
 
-                  <div className="flex-1 text-center px-1.5 min-w-0">
-                    <span className="text-[12px] sm:text-[12.5px] font-semibold tracking-tight block leading-tight truncate">
+                  <div className="flex-1 text-center px-2 min-w-0">
+                    <span className="text-[13px] font-semibold tracking-tight block leading-tight truncate">
                       {link.title}
                     </span>
                     {link.subtitle && (
-                      <span className="text-[9.5px] text-[#546168] block leading-none truncate">
+                      <span className="text-[10px] text-[#546168] block leading-tight truncate mt-0.5 font-normal">
                         {link.subtitle}
                       </span>
                     )}
@@ -326,8 +326,8 @@ export default function ContactBioCardPage() {
         </div>
 
         {/* Bottom Minimal Legal Row */}
-        <footer className="text-center shrink-0 h-5 flex items-center justify-center text-[#a5b0b5]">
-          <p className="text-[8.5px] tracking-wide opacity-75">
+        <footer className="text-center shrink-0 h-6 flex items-center justify-center text-[#a5b0b5]">
+          <p className="text-[9px] tracking-wide opacity-75">
             {current.footerLegal}
           </p>
         </footer>
