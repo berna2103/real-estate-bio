@@ -396,10 +396,13 @@ export default function LuxuryRealEstatePage() {
               </div>
 
               <div id="realscout-home-value-widget" className="w-full flex justify-center">
-                {/* // @ts-ignore */}
+             {/* @ts-expect-error Custom RealScout web component is not included in JSX type definitions. */}
+              
                 <realscout-home-value 
                   agent-encoded-id="QWdlbnQtMzA4MjQ0" 
                   include-phone 
+                  include-name
+                  include-email
                   remove-subtitle
                 />
               </div>
@@ -438,7 +441,7 @@ export default function LuxuryRealEstatePage() {
 
             {/* Embedded Carousel Web Component */}
             <div className="w-full bg-white/5 rounded-2xl p-4 sm:p-6 border border-white/10">
-              {/* // @ts-ignore */}
+              {/* @ts-expect-error Custom RealScout web component is not included in JSX type definitions. */}
               <realscout-office-listings 
                 agent-encoded-id="QWdlbnQtMzA4MjQ0" 
                 cities="Chicago,Berwyn,Calumet City"
