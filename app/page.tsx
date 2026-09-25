@@ -295,7 +295,7 @@ export default function LuxuryRealEstatePage() {
 
                 <div className="flex items-center gap-3 text-white/70">
                   <a 
-                    href="https://www.instagram.com/chicago.realtor2103" 
+                    href="https://www.instagram.com/thechicagorealtor" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="hover:text-white transition-colors"
