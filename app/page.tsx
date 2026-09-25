@@ -92,6 +92,8 @@ const content = {
   }
 };
 
+const HEADSHOT_URL = "https://dealjoy-cdn-dydre3ftcse4a9ap.z01.azurefd.net/preview-sites/bd09618a-b933-45b9-217f-08df1a5e6eb3/images/e60545aa-09d2-431e-80ec-da138ef82493.png";
+
 export default function LuxuryRealEstatePage() {
   const [lang, setLang] = useState<"en" | "es">("en");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -116,12 +118,27 @@ export default function LuxuryRealEstatePage() {
 
       <div className={`${gilda.variable} ${jost.variable} font-sans bg-[#f7f5f0] text-[#16242c] selection:bg-[#a89078]/30 min-h-screen flex flex-col`}>
         
-        {/* HEADER / NAVIGATION */}
+        {/* HEADER / NAVIGATION WITH ELEGANT MICRO-AVATAR LOCKUP */}
         <header className="fixed inset-x-0 top-0 z-50 bg-[#16242c]/95 backdrop-blur-md border-b border-[#2a3840] text-[#f7f5f0] transition-all">
           <div className="mx-auto flex h-20 max-w-[1700px] items-center justify-between gap-6 px-6 md:px-12 lg:px-20">
-            <a href="/" className="flex flex-col leading-none">
-              <span className="font-['Gilda_Display'] text-[23px] tracking-tight text-white">Bernardo Jimenez</span>
-              <span className="mt-1 text-[9px] uppercase tracking-[0.24em] text-[#a5b0b5]">Realty of America</span>
+            
+            {/* Elegant Micro-Headshot + Name Lockup */}
+            <a href="/" className="flex items-center gap-3.5 group">
+              <div className="relative w-11 h-11 rounded-full overflow-hidden border border-white/30 shrink-0 ring-1 ring-white/10 group-hover:border-[#c4a98b] transition-all duration-300 shadow-md">
+                <img
+                  src={HEADSHOT_URL}
+                  alt="Bernardo Jimenez"
+                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="font-['Gilda_Display'] text-[21px] md:text-[23px] tracking-tight text-white group-hover:text-[#c4a98b] transition-colors duration-300">
+                  Bernardo Jimenez
+                </span>
+                <span className="mt-1 text-[9px] uppercase tracking-[0.24em] text-[#a5b0b5]">
+                  Realty of America
+                </span>
+              </div>
             </a>
 
             {/* Desktop Navigation */}
@@ -210,7 +227,7 @@ export default function LuxuryRealEstatePage() {
           )}
         </header>
 
-        {/* HERO SECTION WITH CINEMATIC VIDEO */}
+        {/* HERO SECTION WITH CINEMATIC VIDEO (NO HEADSHOT OVERKILL) */}
         <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-[#16242c] text-white">
           <video 
             className="absolute inset-0 h-full w-full object-cover"
@@ -379,7 +396,7 @@ export default function LuxuryRealEstatePage() {
               </div>
 
               <div id="realscout-home-value-widget" className="w-full flex justify-center">
-                {/* @ts-expect-error - RealScout custom web component */}
+                {/* // @ts-ignore */}
                 <realscout-home-value 
                   agent-encoded-id="QWdlbnQtMzA4MjQ0" 
                   include-phone 
@@ -420,20 +437,16 @@ export default function LuxuryRealEstatePage() {
             </div>
 
             {/* Embedded Carousel Web Component */}
-            
             <div className="w-full bg-white/5 rounded-2xl p-4 sm:p-6 border border-white/10">
-              {/* @ts-expect-error - RealScout custom office listings web component */}
-              
+              {/* // @ts-ignore */}
               <realscout-office-listings 
-                  agent-encoded-id="QWdlbnQtMzA4MjQ0" 
-                  cities="Chicago,Berwyn,Calumet City"
-                  sort-order="NEWEST" 
-                  listing-status="For Sale" 
-                  property-types="SFR,MF,TC" 
-                  include-seller-listings>
-               {/* @ts-expect-error - RealScout custom office listings web component */}
-              
-                </realscout-office-listings>
+                agent-encoded-id="QWdlbnQtMzA4MjQ0" 
+                cities="Chicago,Berwyn,Calumet City"
+                sort-order="NEWEST" 
+                listing-status="For Sale" 
+                property-types="SFR,MF,TC" 
+                include-seller-listings
+              />
             </div>
 
           </div>
@@ -445,7 +458,7 @@ export default function LuxuryRealEstatePage() {
             
             <div className="relative mx-auto aspect-square w-full max-w-[420px] overflow-hidden rounded-2xl bg-[#e6e2d8] border border-[#ded9cf] shadow-md">
               <img 
-                src="https://dealjoy-cdn-dydre3ftcse4a9ap.z01.azurefd.net/preview-sites/bd09618a-b933-45b9-217f-08df1a5e6eb3/images/e60545aa-09d2-431e-80ec-da138ef82493.png"
+                src={HEADSHOT_URL}
                 alt="Bernardo Jimenez, Chicago-area real estate broker"
                 className="h-full w-full object-cover"
               />
