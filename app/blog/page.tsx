@@ -167,7 +167,7 @@ export default function BlogIndexPage() {
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {currentPosts.map((post) => (
+            {currentPosts.map((post, idx) => (
               <article 
                 key={post.slug}
                 className="group flex flex-col bg-white rounded-2xl border border-[#ded9cf] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
@@ -178,6 +178,7 @@ export default function BlogIndexPage() {
                     alt={lang === "en" ? post.title : post.titleEs}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={idx === 0}
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3 bg-[#16242c]/90 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[9.5px] uppercase tracking-widest text-[#c4a98b] font-medium border border-white/10">

@@ -11,10 +11,6 @@ import {
   Calendar, 
   Clock, 
   Languages, 
-  Phone, 
-  Mail, 
-  Share2,
-  CalendarCheck
 } from "lucide-react";
 import { POSTS } from "@/lib/posts";
 

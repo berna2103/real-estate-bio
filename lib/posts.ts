@@ -56,7 +56,7 @@ export const POSTS: Post[] = [
     readTime: "8 min read",
     category: "Neighborhood Guide",
     categoryEs: "Guía de Vecindario",
-    image: "https://images.unsplash.com/photo-urH155LONWs?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
     contentEn: [
       "Tucked directly between the Calumet River, Lake Michigan, and the Indiana state line, East Side (ZIP 60617) functions as one of Chicago's best-kept residential secrets. Unlike the high-density grid common in central wards, East Side retains the quiet, wide-street layout of a mature residential haven while remaining entirely within municipal Chicago limits.",
       "The architectural backbone of the community consists of solid masonry construction. Chicago brick bungalows built between the 1920s and 1950s dominate the tree-lined blocks, featuring full unfinished or walk-out basements, high interior ceilings, expansive front dormers, and hardwood flooring beneath older carpets.",
