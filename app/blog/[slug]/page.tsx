@@ -155,7 +155,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
             </div>
           </div>
 
-          {/* Direct CTA */}
+          {/* Direct CTA
           <div className="mt-10 bg-[#16242c] text-white p-8 rounded-2xl text-center space-y-4">
             <h4 className="font-['Gilda_Display'] text-2xl text-white">
               {lang === "en" ? "Planning your next move?" : "¿Planeando tu siguiente paso inmobiliario?"}
@@ -182,7 +182,70 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                 (708) 314-0477
               </a>
             </div>
-          </div>
+          </div> */}
+
+          {/* Dynamic Bottom-of-Post CTA */}
+{post.category === "Seller Advisory" || post.category === "Homeowner Advisory" ? (
+  /* Seller Intent: Embedded Home Valuation Tool */
+  <div className="mt-12 bg-white p-6 sm:p-10 rounded-2xl border border-[#ded9cf] shadow-lg text-center">
+    <div className="max-w-md mx-auto mb-6">
+      <span className="text-[10px] uppercase tracking-[0.2em] text-[#8c6d48] font-semibold">
+        {lang === "en" ? "Property Equity Check" : "Valuación de Propiedad"}
+      </span>
+      <h3 className="font-['Gilda_Display'] text-2xl sm:text-3xl text-[#16242c] mt-1">
+        {lang === "en" ? "Curious What Your Home is Worth Today?" : "¿Te Preguntas Cuánto Vale tu Propiedad?"}
+      </h3>
+      <p className="text-xs text-[#546168] mt-2 font-light">
+        {lang === "en" 
+          ? "Enter your address below for an instant, automated market evaluation powered by RealScout."
+          : "Ingresa tu dirección para obtener un reporte de mercado instantáneo con datos reales de MLS."}
+      </p>
+    </div>
+
+    <div className="w-full flex justify-center">
+      {/* @ts-expect-error - `realscout-home-value` is a custom web component not recognized by TypeScript. */}
+      <realscout-home-value 
+        agent-encoded-id="QWdlbnQtMzA4MjQ0" 
+        include-phone 
+        remove-subtitle
+      />
+    </div>
+  </div>
+) : (
+  /* Buyer / Neighborhood Intent: Search MLS & Strategy Call */
+  <div className="mt-12 bg-[#16242c] text-white p-8 sm:p-10 rounded-2xl text-center space-y-4 shadow-xl border border-white/10">
+    <span className="text-[10px] uppercase tracking-[0.2em] text-[#c4a98b] font-semibold">
+      {lang === "en" ? "Explore Local Inventory" : "Explorar Inventario Local"}
+    </span>
+    <h3 className="font-['Gilda_Display'] text-2xl sm:text-3xl text-white">
+      {lang === "en" ? "Looking for Homes in This Area?" : "¿Buscando Propiedades en Esta Zona?"}
+    </h3>
+    <p className="text-xs sm:text-sm text-white/80 max-w-lg mx-auto font-light leading-relaxed">
+      {lang === "en"
+        ? "Access real-time MLS listings with customized neighborhood criteria, price drop alerts, and private showings."
+        : "Accede a propiedades actualizadas en tiempo real con alertas de mercado personalizadas y asesoría directa."}
+    </p>
+    
+    <div className="pt-3 flex flex-wrap justify-center gap-3">
+      <a
+        href="https://bernardojimenez.realscout.com/onboarding"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-[#c4a98b] hover:bg-[#b5997a] text-[#16242c] px-6 py-3 rounded-full text-xs uppercase tracking-widest font-semibold transition active:scale-95"
+      >
+        {lang === "en" ? "Search MLS on RealScout" : "Buscar Propiedades en RealScout"}
+      </a>
+      <a
+        href="https://calendly.com/listwithbernardo/30min"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-white/10 hover:bg-white hover:text-[#16242c] border border-white/20 text-white px-6 py-3 rounded-full text-xs uppercase tracking-widest font-semibold transition active:scale-95"
+      >
+        {lang === "en" ? "Schedule a 30-Min Call" : "Agendar Consulta de 30 Min"}
+      </a>
+    </div>
+  </div>
+)}
 
         </main>
 
