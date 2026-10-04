@@ -9,7 +9,8 @@ import {
   Calendar, 
   Phone,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Sparkles
 } from "lucide-react";
 
 const gilda = Gilda_Display({
@@ -25,13 +26,13 @@ const jost = Jost({
 });
 
 export default function MortgageCalculator({ lang = "en" }: { lang?: "en" | "es" }) {
-  // Inputs
+  // Primary Form State
   const [homePrice, setHomePrice] = useState<number>(350000);
   const [downPayment, setDownPayment] = useState<number>(70000);
   const [downPaymentPercent, setDownPaymentPercent] = useState<number>(20);
   const [loanTermYears, setLoanTermYears] = useState<number>(30);
   const [interestRate, setInterestRate] = useState<number>(6.5);
-  const [propertyTaxAnnual, setPropertyTaxAnnual] = useState<number>(4550); // ~1.3% Cook County avg
+  const [propertyTaxAnnual, setPropertyTaxAnnual] = useState<number>(4550); // ~1.3% Cook County benchmark
   const [taxPercent, setTaxPercent] = useState<number>(1.3);
   const [homeInsuranceAnnual, setHomeInsuranceAnnual] = useState<number>(1800);
   const [hoaMonthly, setHoaMonthly] = useState<number>(0);
@@ -68,7 +69,7 @@ export default function MortgageCalculator({ lang = "en" }: { lang?: "en" | "es"
     }
   };
 
-  // Calculations
+  // Financial Calculations
   const loanAmount = Math.max(0, homePrice - downPayment);
 
   const monthlyPrincipalAndInterest = useMemo(() => {
@@ -87,7 +88,7 @@ export default function MortgageCalculator({ lang = "en" }: { lang?: "en" | "es"
   const totalMonthlyPayment =
     monthlyPrincipalAndInterest + monthlyPropertyTax + monthlyInsurance + hoaMonthly;
 
-  // Donut SVG Segments
+  // Donut Chart Segment Slicing
   const segments = useMemo(() => {
     if (totalMonthlyPayment <= 0) return [];
     const piPct = monthlyPrincipalAndInterest / totalMonthlyPayment;
@@ -96,318 +97,390 @@ export default function MortgageCalculator({ lang = "en" }: { lang?: "en" | "es"
     const hoaPct = hoaMonthly / totalMonthlyPayment;
 
     return [
-      { name: lang === "en" ? "Principal & Interest" : "Principal e Interés", value: monthlyPrincipalAndInterest, color: "#16242c", pct: piPct },
-      { name: lang === "en" ? "Property Taxes" : "Impuestos Prediales", value: monthlyPropertyTax, color: "#c4a98b", pct: taxPct },
-      { name: lang === "en" ? "Home Insurance" : "Seguro de Propiedad", value: monthlyInsurance, color: "#7a8a92", pct: insPct },
-      { name: lang === "en" ? "HOA Dues" : "Cuotas de Asociación (HOA)", value: hoaMonthly, color: "#3d4b53", pct: hoaPct },
+      { 
+        name: lang === "en" ? "Principal & Interest" : "Capital e Interés", 
+        value: monthlyPrincipalAndInterest, 
+        color: "#c4a98b", 
+        pct: piPct 
+      },
+      { 
+        name: lang === "en" ? "Property Taxes" : "Impuestos Prediales", 
+        value: monthlyPropertyTax, 
+        color: "#f7f5f0", 
+        pct: taxPct 
+      },
+      { 
+        name: lang === "en" ? "Home Insurance" : "Seguro de Propiedad", 
+        value: monthlyInsurance, 
+        color: "#7a8a92", 
+        pct: insPct 
+      },
+      { 
+        name: lang === "en" ? "HOA Dues" : "Cuotas HOA", 
+        value: hoaMonthly, 
+        color: "#d97706", 
+        pct: hoaPct 
+      },
     ].filter(s => s.value > 0);
   }, [monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyInsurance, hoaMonthly, totalMonthlyPayment, lang]);
 
-  // SVG Circumference for 200x200 viewBox (Radius 70, Stroke 22)
+  // SVG Geometry Calculation (Radius 70, Stroke 20 => ViewBox 200x200)
   const radius = 70;
-  const circumference = 2 * Math.PI * radius; // ~439.82
+  const circumference = 2 * Math.PI * radius;
   let cumulativeStroke = 0;
 
   return (
-    <div className={`${gilda.variable} ${jost.variable} font-sans w-full bg-white rounded-3xl border border-[#ded9cf] p-6 sm:p-10 shadow-[0_20px_50px_rgba(22,36,44,0.06)] text-[#16242c]`}>
-      
-      {/* Top Header Badge */}
-      <div className="border-b border-[#ded9cf] pb-6 mb-8 text-center sm:text-left">
-        <span className="text-[10px] uppercase tracking-[0.22em] text-[#8c6d48] font-semibold">
-          {lang === "en" ? "Financial Advisory Tool" : "Herramienta Financiera"}
-        </span>
-        <h2 className="font-['Gilda_Display'] text-3xl sm:text-4xl text-[#16242c] mt-1.5">
-          {lang === "en" ? "Estimated Mortgage & Monthly Investment" : "Calculadora de Hipoteca y Pago Mensual"}
-        </h2>
-        <p className="text-xs sm:text-sm text-[#546168] mt-1 max-w-2xl font-light">
-          {lang === "en"
-            ? "Calculate your estimated principal, Cook County property taxes, insurance, and HOA dues with real-time breakdowns."
-            : "Estima tu pago de capital, intereses, impuestos prediales de Cook County y seguros en tiempo real."}
-        </p>
-      </div>
+    <div className="relative mx-auto w-full max-w-6xl">
+      {/* Ambient Luxury Halo Glow Behind Container */}
+      <div className="absolute -inset-2 rounded-[2.75rem] bg-gradient-to-r from-[#c4a98b]/20 via-[#16242c]/5 to-[#c4a98b]/25 blur-3xl opacity-80 pointer-events-none" />
 
-      <div className="grid lg:grid-cols-12 gap-10 items-start">
+      <div className={`${gilda.variable} ${jost.variable} font-sans relative w-full bg-white rounded-[2rem] border border-[#ded9cf] p-6 sm:p-10 lg:p-12 shadow-[0_25px_65px_-15px_rgba(22,36,44,0.12)] text-[#16242c]`}>
         
-        {/* LEFT COLUMN: Controls / Inputs */}
-        <div className="lg:col-span-6 space-y-5">
-          
-          {/* Home Value */}
+        {/* Editorial Header Block */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#ded9cf] pb-8 mb-8 gap-6">
           <div>
-            <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
-              {lang === "en" ? "Home Purchase Price" : "Precio de la Propiedad"}
-            </label>
-            <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
-              <input
-                type="number"
-                value={homePrice}
-                onChange={(e) => handleHomePriceChange(Number(e.target.value))}
-                className="w-full pl-8 pr-4 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition"
-              />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#16242c] text-[#c4a98b] text-[10px] uppercase tracking-[0.24em] font-semibold mb-3.5 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c4a98b] animate-pulse" />
+              {lang === "en" ? "Interactive Financial Suite" : "Suite Financiera Interactiva"}
             </div>
+            <h2 className="font-['Gilda_Display'] text-3xl sm:text-4xl lg:text-5xl text-[#16242c] tracking-tight leading-tight">
+              {lang === "en" ? "The Real Cost of Ownership." : "El Costo Real de tu Próximo Hogar."}
+            </h2>
+            <p className="text-xs sm:text-sm text-[#546168] mt-2 max-w-xl font-light leading-relaxed">
+              {lang === "en"
+                ? "Simulate your estimated all-in monthly commitment—factoring in real Cook County tax assessments, realistic hazard insurance, and custom down payment programs."
+                : "Calcula tu inversión mensual estimada integrando los impuestos prediales de Cook County, seguros de propiedad y programas de enganche a tu medida."}
+            </p>
           </div>
 
-          {/* Down Payment (Dual Input: $ and %) */}
-          <div>
-            <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
-              {lang === "en" ? "Down Payment" : "Enganche Inicial"}
-            </label>
-            <div className="grid grid-cols-12 gap-2">
-              <div className="col-span-8 relative">
+          {/* Quick Context Benchmark Pill */}
+          <div className="hidden lg:flex flex-col items-end text-right border-l border-[#ded9cf] pl-8">
+            <span className="text-[10px] uppercase tracking-widest text-[#7a8a92] font-semibold">
+              Cook County Tax Rate
+            </span>
+            <span className="font-['Gilda_Display'] text-xl text-[#16242c] mt-0.5">
+              ~1.3% - 2.1% Typical
+            </span>
+            <span className="text-[10px] text-[#8c6d48] mt-0.5 font-medium">
+              Live updates below
+            </span>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          
+          {/* LEFT COLUMN: Inputs & Presets */}
+          <div className="lg:col-span-6 space-y-6">
+            
+            {/* Quick 1-Tap Price Presets */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10.5px] uppercase tracking-wider font-semibold text-[#7a8a92]">
+                  {lang === "en" ? "Select Market Price Tier" : "Elegir Rango de Mercado"}
+                </span>
+                <span className="text-[10.5px] text-[#8c6d48] font-medium">
+                  {lang === "en" ? "1-Click Preset" : "1 Clic"}
+                </span>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {[250000, 350000, 475000, 650000].map((preset) => (
+                  <button
+                    key={preset}
+                    type="button"
+                    onClick={() => handleHomePriceChange(preset)}
+                    className={`py-2 px-1 rounded-xl text-xs font-medium transition cursor-pointer border ${
+                      homePrice === preset
+                        ? "bg-[#16242c] text-white border-[#16242c] shadow-sm ring-2 ring-[#c4a98b]/40"
+                        : "bg-[#f7f5f0] hover:bg-white text-[#546168] border-[#ded9cf]"
+                    }`}
+                  >
+                    ${(preset / 1000).toFixed(0)}k
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Home Value Input */}
+            <div>
+              <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
+                {lang === "en" ? "Purchase Price" : "Precio de Compra"}
+              </label>
+              <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
                 <input
                   type="number"
-                  value={downPayment}
-                  onChange={(e) => handleDownPaymentAmountChange(Number(e.target.value))}
-                  className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition"
+                  value={homePrice}
+                  onChange={(e) => handleHomePriceChange(Number(e.target.value))}
+                  className="w-full pl-8 pr-4 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-semibold text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition"
                 />
-              </div>
-              <div className="col-span-4 relative">
-                <input
-                  type="number"
-                  step="0.5"
-                  value={downPaymentPercent}
-                  onChange={(e) => handleDownPaymentPercentChange(Number(e.target.value))}
-                  className="w-full pl-3 pr-7 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition text-right"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">%</span>
               </div>
             </div>
-          </div>
 
-          {/* Loan Term & Rate Row */}
-          <div className="grid grid-cols-2 gap-3">
+            {/* Down Payment Dual Input */}
             <div>
               <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
-                {lang === "en" ? "Loan Term" : "Plazo"}
+                {lang === "en" ? "Down Payment" : "Enganche Inicial"}
               </label>
-              <select
-                value={loanTermYears}
-                onChange={(e) => setLoanTermYears(Number(e.target.value))}
-                className="w-full px-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition cursor-pointer"
-              >
-                <option value={30}>30-Year Fixed</option>
-                <option value={20}>20-Year Fixed</option>
-                <option value={15}>15-Year Fixed</option>
-                <option value={10}>10-Year Fixed</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
-                {lang === "en" ? "Interest Rate" : "Tasa de Interés"}
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  step="0.125"
-                  value={interestRate}
-                  onChange={(e) => setInterestRate(Number(e.target.value))}
-                  className="w-full pl-3 pr-7 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition text-right"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">%</span>
+              <div className="grid grid-cols-12 gap-2">
+                <div className="col-span-8 relative">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
+                  <input
+                    type="number"
+                    value={downPayment}
+                    onChange={(e) => handleDownPaymentAmountChange(Number(e.target.value))}
+                    className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition"
+                  />
+                </div>
+                <div className="col-span-4 relative">
+                  <input
+                    type="number"
+                    step="0.5"
+                    value={downPaymentPercent}
+                    onChange={(e) => handleDownPaymentPercentChange(Number(e.target.value))}
+                    className="w-full pl-3 pr-7 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-semibold text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition text-right"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">%</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Toggle Taxes & Advanced Fields */}
-          <button
-            type="button"
-            onClick={() => setShowAdvanced(!showAdvanced)}
-            className="flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-[#8c6d48] hover:text-[#16242c] transition pt-1 cursor-pointer"
-          >
-            <span>{showAdvanced ? (lang === "en" ? "Hide Taxes & Insurance" : "Ocultar Impuestos y Seguro") : (lang === "en" ? "Show Taxes & Insurance" : "Mostrar Impuestos y Seguro")}</span>
-            {showAdvanced ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-          </button>
-
-          {showAdvanced && (
-            <div className="space-y-4 pt-3 border-t border-[#ded9cf]">
-              {/* Property Tax (Dual Input) */}
+            {/* Loan Term & Interest Rate */}
+            <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
-                  {lang === "en" ? "Annual Property Tax" : "Impuesto Predial Anual"}
+                  {lang === "en" ? "Loan Term" : "Plazo de Hipoteca"}
                 </label>
-                <div className="grid grid-cols-12 gap-2">
-                  <div className="col-span-8 relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
-                    <input
-                      type="number"
-                      value={propertyTaxAnnual}
-                      onChange={(e) => handleTaxAmountChange(Number(e.target.value))}
-                      className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition"
-                    />
-                  </div>
-                  <div className="col-span-4 relative">
-                    <input
-                      type="number"
-                      step="0.05"
-                      value={taxPercent}
-                      onChange={(e) => handleTaxPercentChange(Number(e.target.value))}
-                      className="w-full pl-3 pr-7 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition text-right"
-                    />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">%</span>
-                  </div>
-                </div>
+                <select
+                  value={loanTermYears}
+                  onChange={(e) => setLoanTermYears(Number(e.target.value))}
+                  className="w-full px-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition cursor-pointer"
+                >
+                  <option value={30}>30-Year Fixed</option>
+                  <option value={20}>20-Year Fixed</option>
+                  <option value={15}>15-Year Fixed</option>
+                  <option value={10}>10-Year Fixed</option>
+                </select>
               </div>
 
-              {/* Home Insurance & HOA */}
-              <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
+                  {lang === "en" ? "Interest Rate" : "Tasa de Interés"}
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    step="0.125"
+                    value={interestRate}
+                    onChange={(e) => setInterestRate(Number(e.target.value))}
+                    className="w-full pl-3 pr-7 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-semibold text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition text-right"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Toggle Advanced Costs */}
+            <button
+              type="button"
+              onClick={() => setShowAdvanced(!showAdvanced)}
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-[#8c6d48] hover:text-[#16242c] transition pt-1 cursor-pointer"
+            >
+              <span>
+                {showAdvanced 
+                  ? (lang === "en" ? "Hide Taxes & Insurance" : "Ocultar Impuestos y Seguro") 
+                  : (lang === "en" ? "Show Taxes & Insurance" : "Mostrar Impuestos y Seguro")}
+              </span>
+              {showAdvanced ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            </button>
+
+            {/* Advanced Taxes / Insurance / HOA Fields */}
+            {showAdvanced && (
+              <div className="space-y-4 pt-3 border-t border-[#ded9cf]">
                 <div>
                   <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
-                    {lang === "en" ? "Home Insurance / Yr" : "Seguro Anual"}
+                    {lang === "en" ? "Annual Property Tax (Cook Co.)" : "Impuesto Predial Anual"}
                   </label>
-                  <div className="relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
-                    <input
-                      type="number"
-                      value={homeInsuranceAnnual}
-                      onChange={(e) => setHomeInsuranceAnnual(Number(e.target.value))}
-                      className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition"
-                    />
+                  <div className="grid grid-cols-12 gap-2">
+                    <div className="col-span-8 relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
+                      <input
+                        type="number"
+                        value={propertyTaxAnnual}
+                        onChange={(e) => handleTaxAmountChange(Number(e.target.value))}
+                        className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition"
+                      />
+                    </div>
+                    <div className="col-span-4 relative">
+                      <input
+                        type="number"
+                        step="0.05"
+                        value={taxPercent}
+                        onChange={(e) => handleTaxPercentChange(Number(e.target.value))}
+                        className="w-full pl-3 pr-7 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-semibold text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition text-right"
+                      />
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">%</span>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
-                    {lang === "en" ? "HOA Dues / Mo" : "Cuota HOA / Mes"}
-                  </label>
-                  <div className="relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
-                    <input
-                      type="number"
-                      value={hoaMonthly}
-                      onChange={(e) => setHoaMonthly(Number(e.target.value))}
-                      className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] transition"
-                    />
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
+                      {lang === "en" ? "Home Insurance / Yr" : "Seguro Anual"}
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
+                      <input
+                        type="number"
+                        value={homeInsuranceAnnual}
+                        onChange={(e) => setHomeInsuranceAnnual(Number(e.target.value))}
+                        className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider font-semibold text-[#16242c] mb-1.5">
+                      {lang === "en" ? "HOA Dues / Mo" : "Cuota HOA / Mes"}
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-[#7a8a92] font-medium">$</span>
+                      <input
+                        type="number"
+                        value={hoaMonthly}
+                        onChange={(e) => setHoaMonthly(Number(e.target.value))}
+                        className="w-full pl-8 pr-3 py-2.5 bg-[#f7f5f0] border border-[#ded9cf] rounded-xl text-sm font-medium text-[#16242c] focus:outline-none focus:border-[#16242c] focus:bg-white transition"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-
-        </div>
-
-        {/* RIGHT COLUMN: Visual Donut + Breakdown + Lead CTAs */}
-        <div className="lg:col-span-6 flex flex-col justify-between h-full bg-[#f7f5f0] p-6 sm:p-8 rounded-2xl border border-[#ded9cf]">
-          
-          {/* Donut Chart & Total */}
-          <div className="flex flex-col sm:flex-row items-center gap-8 justify-center pb-6 border-b border-[#ded9cf]">
-            
-            {/* SVG Donut */}
-            <div className="relative w-44 h-44 shrink-0">
-              <svg className="w-full h-full -rotate-90" viewBox="0 0 200 200">
-                <circle
-                  cx="100"
-                  cy="100"
-                  r={radius}
-                  fill="transparent"
-                  stroke="#e8e4dc"
-                  strokeWidth="20"
-                />
-                {segments.map((seg, idx) => {
-                  const dashLength = seg.pct * circumference;
-                  const dashOffset = -cumulativeStroke;
-                  cumulativeStroke += dashLength;
-                  return (
-                    <circle
-                      key={idx}
-                      cx="100"
-                      cy="100"
-                      r={radius}
-                      fill="transparent"
-                      stroke={seg.color}
-                      strokeWidth="20"
-                      strokeDasharray={`${dashLength} ${circumference - dashLength}`}
-                      strokeDashoffset={dashOffset}
-                      className="transition-all duration-500 ease-out"
-                    />
-                  );
-                })}
-              </svg>
-
-              {/* Donut Center Total Lockup */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className="text-[10px] uppercase tracking-widest text-[#7a8a92] font-medium">
-                  {lang === "en" ? "Est. Monthly" : "Pago Estimado"}
-                </span>
-                <span className="font-['Gilda_Display'] text-2xl sm:text-3xl font-bold text-[#16242c] leading-tight">
-                  ${totalMonthlyPayment.toLocaleString()}
-                </span>
-              </div>
-            </div>
-
-            {/* Legend List */}
-            <div className="space-y-2 w-full max-w-[240px]">
-              {segments.map((seg, idx) => (
-                <div key={idx} className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: seg.color }} />
-                    <span className="text-[#546168]">{seg.name}</span>
-                  </div>
-                  <span className="font-semibold text-[#16242c]">${seg.value.toLocaleString()}</span>
-                </div>
-              ))}
-            </div>
+            )}
 
           </div>
 
-          {/* Integrated Trust & Advisory CTA Cards */}
-          <div className="grid sm:grid-cols-2 gap-3 mt-6 pt-2">
-            <div className="bg-white p-4 rounded-xl border border-[#ded9cf] flex flex-col justify-between">
-              <div>
-                <span className="text-[10px] uppercase tracking-wider text-[#8c6d48] font-semibold">
-                  {lang === "en" ? "Pre-Approval & Rates" : "Pre-Aprobación"}
-                </span>
-                <h4 className="font-['Gilda_Display'] text-base text-[#16242c] mt-0.5">
-                  {lang === "en" ? "Ready to buy?" : "¿Listo para comprar?"}
-                </h4>
-                <p className="text-[11px] text-[#6b767d] mt-1 font-light leading-relaxed">
-                  {lang === "en"
-                    ? "Connect with my preferred bilingual lenders for low down payment & grant options."
-                    : "Conéctate con prestamistas locales para préstamos FHA y subsidios de enganche."}
-                </p>
+          {/* RIGHT COLUMN: Premium Architectural Visual Panel */}
+          <div className="lg:col-span-6 flex flex-col justify-between h-full bg-[#16242c] text-[#f7f5f0] p-7 sm:p-9 rounded-[1.75rem] shadow-xl border border-white/10">
+            
+            {/* Top Indicator */}
+            <div className="flex items-center justify-between pb-6 border-b border-[#2a3840]">
+              <span className="text-[10px] uppercase tracking-[0.22em] text-[#c4a98b] font-semibold">
+                {lang === "en" ? "Monthly Payment Breakdown" : "Desglose de Inversión Mensual"}
+              </span>
+              <span className="text-[10px] uppercase tracking-wider text-[#a5b0b5]">
+                {loanTermYears}Y Fixed @ {interestRate}%
+              </span>
+            </div>
+
+            {/* Donut Chart & Legend Centerpiece */}
+            <div className="py-8 flex flex-col sm:flex-row items-center justify-center gap-8">
+              
+              {/* SVG Donut Visual */}
+              <div className="relative w-48 h-48 shrink-0">
+                <svg className="w-full h-full -rotate-90" viewBox="0 0 200 200">
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r={radius}
+                    fill="transparent"
+                    stroke="#22333d"
+                    strokeWidth="20"
+                  />
+                  {segments.map((seg, idx) => {
+                    const dashLength = seg.pct * circumference;
+                    const dashOffset = -cumulativeStroke;
+                    cumulativeStroke += dashLength;
+                    return (
+                      <circle
+                        key={idx}
+                        cx="100"
+                        cy="100"
+                        r={radius}
+                        fill="transparent"
+                        stroke={seg.color}
+                        strokeWidth="20"
+                        strokeDasharray={`${dashLength} ${circumference - dashLength}`}
+                        strokeDashoffset={dashOffset}
+                        className="transition-all duration-500 ease-out"
+                      />
+                    );
+                  })}
+                </svg>
+
+                {/* Donut Center Amount Lockup */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-2">
+                  <span className="text-[9.5px] uppercase tracking-widest text-[#a5b0b5] font-medium">
+                    {lang === "en" ? "Total / Mo" : "Total / Mes"}
+                  </span>
+                  <span className="font-['Gilda_Display'] text-3xl sm:text-4xl font-bold text-white leading-tight">
+                    ${totalMonthlyPayment.toLocaleString()}
+                  </span>
+                </div>
               </div>
+
+              {/* Segment Legend */}
+              <div className="space-y-3 w-full max-w-[220px]">
+                {segments.map((seg, idx) => (
+                  <div key={idx} className="flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: seg.color }} />
+                      <span className="text-[#a5b0b5] font-light">{seg.name}</span>
+                    </div>
+                    <span className="font-semibold text-white">${seg.value.toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+            {/* Bottom Direct Strategic CTAs */}
+            <div className="grid sm:grid-cols-2 gap-3 pt-6 border-t border-[#2a3840]">
               <a
                 href="https://calendly.com/listwithbernardo/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 w-full bg-[#16242c] hover:bg-[#2a3840] text-white py-2 rounded-lg text-xs font-medium uppercase tracking-wider text-center transition flex items-center justify-center gap-1 active:scale-95"
+                className="group flex flex-col justify-between p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition active:scale-95 text-left"
               >
-                <span>{lang === "en" ? "Consult with Bernardo" : "Hablar con Bernardo"}</span>
-                <ArrowUpRight className="w-3 h-3" />
+                <div>
+                  <span className="text-[9.5px] uppercase tracking-wider text-[#c4a98b] font-semibold block">
+                    {lang === "en" ? "Financing Strategy" : "Estrategia Financiera"}
+                  </span>
+                  <span className="text-xs font-medium text-white block mt-0.5">
+                    {lang === "en" ? "Schedule a 30-Min Call" : "Agendar Consulta de 30 Min"}
+                  </span>
+                </div>
+                <div className="mt-2.5 inline-flex items-center gap-1 text-[10px] text-[#c4a98b] group-hover:text-white transition-colors">
+                  <span>{lang === "en" ? "Speak with Bernardo" : "Hablar con Bernardo"}</span>
+                  <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
               </a>
-            </div>
 
-            <div className="bg-white p-4 rounded-xl border border-[#ded9cf] flex flex-col justify-between">
-              <div>
-                <span className="text-[10px] uppercase tracking-wider text-[#8c6d48] font-semibold">
-                  {lang === "en" ? "MLS Listings" : "Inventario Real"}
-                </span>
-                <h4 className="font-['Gilda_Display'] text-base text-[#16242c] mt-0.5">
-                  {lang === "en" ? "Browse Active Homes" : "Buscar Propiedades"}
-                </h4>
-                <p className="text-[11px] text-[#6b767d] mt-1 font-light leading-relaxed">
-                  {lang === "en"
-                    ? "Search verified properties in Southeast Chicago and the South Suburbs with real-time alerts."
-                    : "Explora propiedades activas en East Side, Hegewisch y Berwyn en tiempo real."}
-                </p>
-              </div>
               <a
                 href="https://bernardojimenez.realscout.com/onboarding"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 w-full bg-[#c4a98b] hover:bg-[#b5997a] text-[#16242c] py-2 rounded-lg text-xs font-semibold uppercase tracking-wider text-center transition flex items-center justify-center gap-1 active:scale-95"
+                className="group flex flex-col justify-between p-3.5 rounded-xl bg-[#c4a98b] hover:bg-[#b5997a] text-[#16242c] transition active:scale-95 text-left"
               >
-                <span>{lang === "en" ? "Search RealScout" : "Ver Propiedades"}</span>
-                <ArrowUpRight className="w-3 h-3" />
+                <div>
+                  <span className="text-[9.5px] uppercase tracking-wider text-[#16242c]/70 font-semibold block">
+                    {lang === "en" ? "Real-Time MLS Search" : "Búsqueda en MLS"}
+                  </span>
+                  <span className="text-xs font-bold text-[#16242c] block mt-0.5">
+                    {lang === "en" ? "Find Homes in This Range" : "Ver Casas en Este Rango"}
+                  </span>
+                </div>
+                <div className="mt-2.5 inline-flex items-center gap-1 text-[10px] text-[#16242c] font-semibold">
+                  <span>{lang === "en" ? "Open RealScout Feed" : "Abrir RealScout"}</span>
+                  <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
               </a>
             </div>
+
           </div>
 
         </div>
 
       </div>
-
     </div>
   );
 }

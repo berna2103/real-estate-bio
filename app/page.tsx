@@ -422,7 +422,7 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
-        <section className="pb-20 bg-[#f7f5f0]  border-[#ded9cf]">
+        <section id="calculator" className="pb-20 bg-[#f7f5f0]  border-[#ded9cf]">
   <div className="mx-auto max-w-[1400px] px-6 md:px-12">
     <MortgageCalculator lang={lang} />
   </div>
