@@ -65,6 +65,13 @@ const content = {
         href: "https://bernardojimenez.realscout.com/homesearch/home-reports",
         icon: DollarSign,
       },
+      {
+  title: "True Living Cost Calculator",
+  subtitle: "Estimate mortgage + Cook County utility bills",
+  href: "/calculator",
+  icon: DollarSign,
+  highlight: true,
+}
     ],
     footerLegal: "© 2026 Realty of America, LLC · Equal Housing Opportunity",
   },

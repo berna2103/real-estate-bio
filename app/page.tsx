@@ -1,6 +1,5 @@
 "use client";
 
-import MortgageCalculator from "@/app/components/MortgageCalculator";
 import { useState, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
@@ -15,8 +14,9 @@ import {
   Calendar,
   Menu,
   X,
-  BookOpen
+  Calculator
 } from "lucide-react";
+import MortgageCalculator from "@/app/components/MortgageCalculator";
 
 const gilda = Gilda_Display({
   subsets: ["latin"],
@@ -42,6 +42,7 @@ const content = {
     badgeLocation: "Chicago · Illinois",
     navAbout: "About",
     navBlog: "Journal",
+    navCalc: "Calculator",
     navMarkets: "Markets",
     navSearch: "Home Search",
     navValuation: "Valuation",
@@ -76,6 +77,7 @@ const content = {
     badgeLocation: "Chicago · Illinois",
     navAbout: "Acerca de mí",
     navBlog: "Artículos",
+    navCalc: "Calculadora",
     navMarkets: "Mercados",
     navSearch: "Búsqueda",
     navValuation: "Valuación",
@@ -127,12 +129,12 @@ export default function LuxuryRealEstatePage() {
 
       <div className={`${gilda.variable} ${jost.variable} font-sans bg-[#f7f5f0] text-[#16242c] selection:bg-[#a89078]/30 min-h-screen flex flex-col`}>
         
-        {/* HEADER / NAVIGATION WITH PROPER BLOG LINK */}
-        <header className="fixed inset-x-0 top-0 z-50 bg-[#16242c]/95 backdrop-blur-md border-b border-[#2a3840] text-[#f7f5f0] transition-all">
-          <div className="mx-auto flex h-20 max-w-[1700px] items-center justify-between gap-6 px-6 md:px-12 lg:px-20">
+       {/* HEADER / NAVIGATION */}
+        <header className="fixed inset-x-0 top-0 z-50 bg-[#16242c]/95 backdrop-blur-md border-b border-[#2a3840] text-[#f7f5f0]">
+          <div className="mx-auto flex h-20 max-w-[1700px] items-center justify-between gap-4 px-6 md:px-12 lg:px-20">
             
             {/* Elegant Micro-Headshot + Name Lockup */}
-            <a href="/" className="flex items-center gap-3.5 group">
+            <a href="/" className="flex items-center gap-3.5 group shrink-0">
               <div className="relative w-11 h-11 rounded-full overflow-hidden border border-white/30 shrink-0 ring-1 ring-white/10 group-hover:border-[#c4a98b] transition-all duration-300 shadow-md">
                 <img
                   src={HEADSHOT_URL}
@@ -151,10 +153,13 @@ export default function LuxuryRealEstatePage() {
             </a>
 
             {/* Desktop Navigation */}
-            <nav className="hidden items-center gap-7 lg:flex">
+            <nav className="hidden items-center gap-6 lg:flex">
               <a href="#about" className="text-[11px] uppercase tracking-[0.18em] text-[#f7f5f0] hover:text-[#c4a98b] transition-colors">
                 {t.navAbout}
               </a>
+              <Link href="/calculator" className="text-[11px] uppercase tracking-[0.18em] text-[#c4a98b] hover:text-white transition-colors font-medium">
+                {t.navCalc}
+              </Link>
               <Link href="/blog" className="text-[11px] uppercase tracking-[0.18em] text-[#f7f5f0] hover:text-[#c4a98b] transition-colors">
                 {t.navBlog}
               </Link>
@@ -198,20 +203,12 @@ export default function LuxuryRealEstatePage() {
               </button>
             </nav>
 
-            {/* Mobile Actions */}
-            <div className="flex items-center gap-2.5 lg:hidden">
-              <a 
-                href="tel:7083140477"
-                className="p-2 rounded-full border border-white/20 text-[#c4a98b]"
-                aria-label="Call Bernardo"
-              >
-                <Phone className="w-4 h-4" />
-              </a>
-
+            {/* Mobile Top Header Actions */}
+            <div className="flex items-center gap-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => setLang(lang === "en" ? "es" : "en")}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-white/20 text-[11px] text-white"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-white/20 text-[11px] text-white cursor-pointer active:scale-95"
               >
                 <Languages className="w-3 h-3 text-[#c4a98b]" />
                 <span>{t.toggleLabel}</span>
@@ -220,27 +217,76 @@ export default function LuxuryRealEstatePage() {
               <button 
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-white border border-white/20"
+                className="p-2.5 text-white bg-white/5 border border-white/20 rounded-xl cursor-pointer active:scale-95 flex items-center justify-center"
                 aria-label="Toggle menu"
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-5 h-5 text-[#c4a98b]" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
 
-          {/* Mobile Dropdown */}
+          {/* FULL VISIBILITY MOBILE DROPDOWN DRAWER */}
           {mobileMenuOpen && (
-            <div className="lg:hidden bg-[#16242c] border-b border-[#2a3840] px-6 py-6 space-y-4 text-sm uppercase tracking-widest text-center">
-              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-white/90">{t.navAbout}</a>
-              <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-[#c4a98b] font-medium">{t.navBlog}</Link>
-              <a href="https://bernardojimenez.realscout.com/onboarding" target="_blank" rel="noopener noreferrer" className="block py-2 text-white/90">{t.navSearch}</a>
-              <a href="#valuation" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-white/90">{t.navValuation}</a>
-              <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-white/90">{t.navTalk}</a>
+            <div className="lg:hidden w-full bg-[#16242c] border-b border-[#2a3840] px-6 py-6 space-y-3.5 text-sm uppercase tracking-widest text-center shadow-[0_20px_40px_rgba(0,0,0,0.8)] animate-in fade-in slide-in-from-top-2 duration-200">
+              
+              {/* PRIMARY PROMINENT CALCULATOR BUTTON */}
+              <Link 
+                href="/calculator" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#c4a98b] hover:bg-[#b5997a] text-[#16242c] rounded-xl font-bold tracking-wider transition-all shadow-md active:scale-98"
+              >
+                <Calculator className="w-4 h-4 stroke-[2.5]" />
+                <span>{t.navCalc}</span>
+              </Link>
+
+              <div className="h-px w-full bg-white/10 my-2" />
+
+              <a 
+                href="#about" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="block py-2 text-white/90 hover:text-white"
+              >
+                {t.navAbout}
+              </a>
+
+              <Link 
+                href="/blog" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="block py-2 text-white/90 hover:text-white"
+              >
+                {t.navBlog}
+              </Link>
+
+              <a 
+                href="https://bernardojimenez.realscout.com/onboarding" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="block py-2 text-white/90 hover:text-white"
+              >
+                {t.navSearch}
+              </a>
+
+              <a 
+                href="#valuation" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="block py-2 text-white/90 hover:text-white"
+              >
+                {t.navValuation}
+              </a>
+
+              <a 
+                href="/contact" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="block py-2 text-[#c4a98b] font-semibold"
+              >
+                {t.navTalk}
+              </a>
             </div>
           )}
         </header>
 
-        {/* HERO SECTION WITH CINEMATIC VIDEO */}
+        {/* HERO SECTION */}
         <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-[#16242c] text-white">
           <video 
             className="absolute inset-0 h-full w-full object-cover"
@@ -253,7 +299,7 @@ export default function LuxuryRealEstatePage() {
           />
           <div className="absolute inset-0 bg-[#16242c]/65" />
 
-          <div className="relative mx-auto w-full max-w-[1600px] px-6 pb-20 pt-36 md:px-12 md:pb-24 lg:px-20 lg:pb-28">
+          <div className="relative mx-auto w-full max-w-[1600px] px-6 pb-24 pt-36 md:px-12 md:pb-24 lg:px-20 lg:pb-28">
             <div className="max-w-3xl border-l border-white/60 pl-6 md:pl-10">
               <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.26em] text-white/90 md:mb-6">
                 {t.taglineSubtitle}
@@ -286,7 +332,7 @@ export default function LuxuryRealEstatePage() {
                 </a>
               </div>
 
-              {/* Quick Connect Strip (Phone, Email, Socials) */}
+              {/* Quick Connect Strip */}
               <div className="mt-10 pt-6 border-t border-white/20 max-w-xl flex flex-wrap items-center justify-between gap-4 text-white">
                 <div className="flex items-center gap-4 text-xs tracking-wider uppercase font-medium">
                   <a 
@@ -353,8 +399,15 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
+        {/* ON-PAGE INTERACTIVE MORTGAGE & TRUE LIVING COST CALCULATOR */}
+        <section id="calculator" className="py-20 md:py-28 bg-[#f7f5f0] border-t border-[#ded9cf] scroll-mt-20">
+          <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-12">
+            <MortgageCalculator lang={lang} />
+          </div>
+        </section>
+
         {/* VALUATION & SERVICES SECTION WITH REALSCOUT CMA EMBED */}
-        <section id="valuation" className="py-20 md:py-32 bg-[#f7f5f0] text-[#16242c]">
+        <section id="valuation" className="py-20 md:py-32 bg-[#f7f5f0] text-[#16242c] border-t border-[#ded9cf]">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12 lg:px-20 grid gap-12 lg:grid-cols-12 lg:items-center">
             
             <div className="lg:col-span-6 space-y-6">
@@ -409,8 +462,7 @@ export default function LuxuryRealEstatePage() {
               </div>
 
               <div id="realscout-home-value-widget" className="w-full flex justify-center">
-                {/* @ts-expect-error Custom RealScout web component is not included in JSX intrinsic element typings. */}
-             
+                {/* @ts-expect-error - custom Elements require a JSX intrinsic definition */}
                 <realscout-home-value 
                   agent-encoded-id="QWdlbnQtMzA4MjQ0" 
                   include-phone 
@@ -422,17 +474,11 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
-        <section id="calculator" className="pb-20 bg-[#f7f5f0]  border-[#ded9cf]">
-  <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-    <MortgageCalculator lang={lang} />
-  </div>
-</section>
-
         {/* FEATURED OFFICE LISTINGS WITH REALSCOUT CAROUSEL */}
         <section className="py-20 md:py-28 bg-[#16242c] text-[#f7f5f0]">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12 lg:px-20">
             
-            <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end border-b border-[#e8edef] pb-8">
+            <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end border-b border-[#2a3840] pb-8">
               <div>
                 <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-[#a5b0b5]">
                   {t.featuredBadge}
@@ -457,8 +503,8 @@ export default function LuxuryRealEstatePage() {
             </div>
 
             {/* Embedded Carousel Web Component */}
-            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 border border-white/10">
-              {/* @ts-expect-error Custom RealScout web component is not included in JSX intrinsic element typings. */}
+            <div className="w-full bg-white/5 rounded-2xl p-4 sm:p-6 border border-white/10">
+              {/* @ts-expect-error - Realscout web component is not a recognized JSX intrinsic element */}
               <realscout-office-listings 
                 agent-encoded-id="QWdlbnQtMzA4MjQ0" 
                 cities="Chicago,Berwyn,Calumet City"
@@ -472,7 +518,7 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
-        {/* ABOUT SECTION (FIRST-PERSON EDITORIAL TONE) */}
+        {/* ABOUT SECTION */}
         <section id="about" className="py-20 md:py-32 bg-[#f7f5f0] text-[#16242c]">
           <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-16 lg:px-12">
             
@@ -566,7 +612,7 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
-        {/* FOOTER WITH PROPER BLOG LINK & UPDATED INSTAGRAM */}
+        {/* FOOTER */}
         <footer className="bg-[#16242c] text-[#f7f5f0] pt-20 pb-10 border-t border-[#2a3840]">
           <div className="mx-auto max-w-[1700px] px-6 md:px-12 lg:px-20">
             <div className="grid gap-12 border-b border-[#2a3840] pb-16 md:grid-cols-[1.4fr_0.6fr_0.6fr]">
@@ -587,7 +633,8 @@ export default function LuxuryRealEstatePage() {
                 <p className="mb-5 text-[10px] uppercase tracking-[0.2em] text-[#a5b0b5]">Explore</p>
                 <div className="flex flex-col gap-3 text-sm text-[#f7f5f0]/80">
                   <a href="#about" className="hover:text-white">About Me</a>
-                  <Link href="/blog" className="text-[#c4a98b] hover:text-white font-medium">Real Estate Journal (Blog)</Link>
+                  <Link href="/calculator" className="text-[#c4a98b] hover:text-white font-medium">True Cost Calculator</Link>
+                  <Link href="/blog" className="hover:text-white">Real Estate Journal (Blog)</Link>
                   <a href="https://bernardojimenez.realscout.com/onboarding" target="_blank" rel="noopener noreferrer" className="hover:text-white">Home Search (MLS)</a>
                   <a href="#valuation" className="hover:text-white">Instant Home Valuation</a>
                   <a href="https://calendly.com/listwithbernardo/30min" target="_blank" rel="noopener noreferrer" className="hover:text-white">Schedule 30-Min Call</a>
@@ -627,14 +674,24 @@ export default function LuxuryRealEstatePage() {
           </div>
         </footer>
 
-        {/* Floating Mobile Dock (Call, Text, Book) */}
-        <div className="fixed bottom-4 inset-x-4 z-40 lg:hidden">
-          <div className="mx-auto max-w-sm bg-[#16242c]/95 backdrop-blur-xl border border-white/20 rounded-full py-2.5 px-6 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-white">
+        {/* FLOATING MOBILE BOTTOM ACTION DOCK */}
+        <div className="fixed bottom-4 inset-x-3 z-40 lg:hidden">
+          <div className="mx-auto max-w-md bg-[#16242c]/95 backdrop-blur-xl border border-white/20 rounded-full py-2 px-5 flex items-center justify-between shadow-[0_10px_35px_rgba(0,0,0,0.6)] text-white">
+            <Link 
+              href="/calculator" 
+              className="flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-[#c4a98b]"
+            >
+              <Calculator className="w-3.5 h-3.5" />
+              <span>Calc</span>
+            </Link>
+
+            <span className="h-4 w-px bg-white/20" />
+
             <a 
               href="tel:7083140477" 
-              className="flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium text-[#c4a98b]"
+              className="flex items-center gap-1 text-xs uppercase tracking-wider font-medium text-white/90 hover:text-white"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <Phone className="w-3.5 h-3.5 text-[#c4a98b]" />
               <span>Call</span>
             </a>
 
@@ -642,9 +699,9 @@ export default function LuxuryRealEstatePage() {
 
             <a 
               href="sms:7083140477" 
-              className="flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium hover:text-[#c4a98b]"
+              className="flex items-center gap-1 text-xs uppercase tracking-wider font-medium text-white/90 hover:text-white"
             >
-              <MessageSquare className="w-3.5 h-3.5" />
+              <MessageSquare className="w-3.5 h-3.5 text-[#c4a98b]" />
               <span>Text</span>
             </a>
 
@@ -654,7 +711,7 @@ export default function LuxuryRealEstatePage() {
               href="https://calendly.com/listwithbernardo/30min" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium text-white hover:text-[#c4a98b]"
+              className="flex items-center gap-1 text-xs uppercase tracking-wider font-medium text-white hover:text-[#c4a98b]"
             >
               <Calendar className="w-3.5 h-3.5 text-[#c4a98b]" />
               <span>Book</span>
@@ -693,7 +750,7 @@ export default function LuxuryRealEstatePage() {
           font-family: var(--font-body), sans-serif !important;
         }
 
-        /* 1. MRED Legal Disclaimer Text */
+        /* MRED Legal Disclaimer Text */
         realscout-office-listings [class*="disclaimer"],
         realscout-office-listings footer,
         realscout-office-listings p {
@@ -701,14 +758,13 @@ export default function LuxuryRealEstatePage() {
           opacity: 0.9 !important;
         }
 
-        /* 2. All Bottom Row / Pagination Elements */
+        /* Pagination Elements */
         realscout-office-listings nav,
         realscout-office-listings [class*="pagination"],
         realscout-office-listings [class*="pager"] {
           color: #f7f5f0 !important;
         }
 
-        /* 3. Inactive Number Links, Buttons, and Ellipses */
         realscout-office-listings nav *,
         realscout-office-listings [class*="pagination"] *,
         realscout-office-listings [class*="pager"] * {
@@ -717,7 +773,7 @@ export default function LuxuryRealEstatePage() {
           stroke: #f7f5f0 !important;
         }
 
-        /* 4. Number Items & Control Arrows (Pill Button Shell) */
+        /* Number Items & Arrow Controls */
         realscout-office-listings nav a,
         realscout-office-listings nav button,
         realscout-office-listings [class*="pagination"] a,
@@ -736,7 +792,7 @@ export default function LuxuryRealEstatePage() {
           font-weight: 500 !important;
         }
 
-        /* 5. Active / Selected Page Number */
+        /* Active Selected Page */
         realscout-office-listings nav [class*="active"],
         realscout-office-listings nav button[aria-current="page"],
         realscout-office-listings nav a[aria-current="page"],
@@ -747,7 +803,7 @@ export default function LuxuryRealEstatePage() {
           border-color: #c4a98b !important;
         }
 
-        /* 6. Hover States */
+        /* Hover States */
         realscout-office-listings nav a:hover,
         realscout-office-listings nav button:hover,
         realscout-office-listings [class*="pagination"] a:hover,
@@ -757,7 +813,7 @@ export default function LuxuryRealEstatePage() {
           border-color: #c4a98b !important;
         }
 
-        /* 7. Disabled Arrow Buttons */
+        /* Disabled Controls */
         realscout-office-listings nav button:disabled,
         realscout-office-listings nav a[aria-disabled="true"],
         realscout-office-listings [class*="disabled"] {
