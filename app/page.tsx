@@ -1,5 +1,6 @@
 "use client";
 
+import MortgageCalculator from "@/app/components/MortgageCalculator";
 import { useState, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
@@ -421,11 +422,17 @@ export default function LuxuryRealEstatePage() {
           </div>
         </section>
 
+        <section className="pb-20 bg-[#f7f5f0]  border-[#ded9cf]">
+  <div className="mx-auto max-w-[1400px] px-6 md:px-12">
+    <MortgageCalculator lang={lang} />
+  </div>
+</section>
+
         {/* FEATURED OFFICE LISTINGS WITH REALSCOUT CAROUSEL */}
         <section className="py-20 md:py-28 bg-[#16242c] text-[#f7f5f0]">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12 lg:px-20">
             
-            <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end border-b border-[#2a3840] pb-8">
+            <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end border-b border-[#e8edef] pb-8">
               <div>
                 <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-[#a5b0b5]">
                   {t.featuredBadge}
@@ -450,7 +457,7 @@ export default function LuxuryRealEstatePage() {
             </div>
 
             {/* Embedded Carousel Web Component */}
-            <div className="w-full bg-white/5 rounded-2xl p-4 sm:p-6 border border-white/10">
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 border border-white/10">
               {/* @ts-expect-error Custom RealScout web component is not included in JSX intrinsic element typings. */}
               <realscout-office-listings 
                 agent-encoded-id="QWdlbnQtMzA4MjQ0" 
@@ -657,7 +664,7 @@ export default function LuxuryRealEstatePage() {
 
       </div>
 
-      {/* Global RealScout Form & Typography Styling */}
+      {/* Global RealScout Form, Office Listings & High-Contrast Pagination Styling */}
       <style jsx global>{`
         realscout-home-value form,
         realscout-home-value .rs-home-value-widget,
@@ -673,6 +680,7 @@ export default function LuxuryRealEstatePage() {
           width: 100% !important;
         }
 
+        /* Listing card typography */
         realscout-office-listings [class*="price"],
         realscout-office-listings .price {
           font-family: var(--font-heading), serif !important;
@@ -681,9 +689,83 @@ export default function LuxuryRealEstatePage() {
         }
 
         realscout-office-listings [class*="address"],
-        realscout-office-listings [class*="details"],
-        realscout-office-listings span {
+        realscout-office-listings [class*="details"] {
           font-family: var(--font-body), sans-serif !important;
+        }
+
+        /* 1. MRED Legal Disclaimer Text */
+        realscout-office-listings [class*="disclaimer"],
+        realscout-office-listings footer,
+        realscout-office-listings p {
+          color: #a5b0b5 !important;
+          opacity: 0.9 !important;
+        }
+
+        /* 2. All Bottom Row / Pagination Elements */
+        realscout-office-listings nav,
+        realscout-office-listings [class*="pagination"],
+        realscout-office-listings [class*="pager"] {
+          color: #f7f5f0 !important;
+        }
+
+        /* 3. Inactive Number Links, Buttons, and Ellipses */
+        realscout-office-listings nav *,
+        realscout-office-listings [class*="pagination"] *,
+        realscout-office-listings [class*="pager"] * {
+          color: #f7f5f0 !important;
+          fill: #f7f5f0 !important;
+          stroke: #f7f5f0 !important;
+        }
+
+        /* 4. Number Items & Control Arrows (Pill Button Shell) */
+        realscout-office-listings nav a,
+        realscout-office-listings nav button,
+        realscout-office-listings [class*="pagination"] a,
+        realscout-office-listings [class*="pagination"] button {
+          color: #f7f5f0 !important;
+          background-color: rgba(255, 255, 255, 0.12) !important;
+          border: 1px solid rgba(255, 255, 255, 0.25) !important;
+          border-radius: 9999px !important;
+          min-width: 32px !important;
+          height: 32px !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          margin: 0 3px !important;
+          transition: all 0.2s ease !important;
+          font-weight: 500 !important;
+        }
+
+        /* 5. Active / Selected Page Number */
+        realscout-office-listings nav [class*="active"],
+        realscout-office-listings nav button[aria-current="page"],
+        realscout-office-listings nav a[aria-current="page"],
+        realscout-office-listings [class*="pagination"] [class*="active"] {
+          background-color: #c4a98b !important;
+          color: #16242c !important;
+          font-weight: 700 !important;
+          border-color: #c4a98b !important;
+        }
+
+        /* 6. Hover States */
+        realscout-office-listings nav a:hover,
+        realscout-office-listings nav button:hover,
+        realscout-office-listings [class*="pagination"] a:hover,
+        realscout-office-listings [class*="pagination"] button:hover {
+          background-color: #c4a98b !important;
+          color: #16242c !important;
+          border-color: #c4a98b !important;
+        }
+
+        /* 7. Disabled Arrow Buttons */
+        realscout-office-listings nav button:disabled,
+        realscout-office-listings nav a[aria-disabled="true"],
+        realscout-office-listings [class*="disabled"] {
+          opacity: 0.3 !important;
+          color: #6b767d !important;
+          background-color: transparent !important;
+          border-color: rgba(255, 255, 255, 0.1) !important;
+          cursor: not-allowed !important;
         }
       `}</style>
     </>
