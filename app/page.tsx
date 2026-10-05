@@ -503,7 +503,7 @@ export default function LuxuryRealEstatePage() {
             </div>
 
             {/* Embedded Carousel Web Component */}
-            <div className="w-full bg-white/5 rounded-2xl p-4 sm:p-6 border border-white/10">
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 border border-white/10">
               {/* @ts-expect-error - Realscout web component is not a recognized JSX intrinsic element */}
               <realscout-office-listings 
                 agent-encoded-id="QWdlbnQtMzA4MjQ0" 

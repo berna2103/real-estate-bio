@@ -77,6 +77,78 @@ export const POSTS: Post[] = [
     ]
   },
   {
+    slug: "ihda-illinois-down-payment-assistance-programs-guide",
+    title: "IHDA Down Payment Assistance: How to Secure Up to $15,000 in Chicago & Cook County",
+    titleEs: "Programas de Asistencia IHDA: Cómo Obtener Hasta $15,000 para Enganche en Chicago",
+    excerpt: "A complete breakdown of Illinois Housing Development Authority (IHDA) programs: Access Home ($15k), Access Forgivable ($6k), Access Deferred ($7.5k), and Access Repayable ($10k).",
+    excerptEs: "Guía detallada de los programas de IHDA: Access Home ($15k), Access Forgivable ($6k), Access Deferred ($7.5k) y Access Repayable ($10k) con sus requisitos oficiales.",
+    date: "2026-10-04",
+    readTime: "8 min read",
+    category: "Buyer Advisory",
+    categoryEs: "Asesoría para Compradores",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
+    contentEn: [
+      "Saving for a down payment remains the number one obstacle for homebuyers in Chicago and Cook County. The Illinois Housing Development Authority (IHDA) provides specialized assistance options that directly bridge the upfront cash gap for qualified buyers.",
+      "The flagship IHDA Access Home program provides up to $15,000 (or up to 6% of the purchase price) structured as a 0% interest deferred second mortgage with no monthly payments, repayable only when the property is sold, refinanced, or after 30 years.",
+      "For buyers prioritizing loan forgiveness, the Access Forgivable tier grants 4% of the purchase price up to $6,000, forgiven on a monthly schedule over a 10-year owner-occupancy period. Alternatively, Access Deferred offers up to $7,500 (5%), and Access Repayable provides up to $10,000 (10%) repaid at 0% interest over 10 years.",
+      "Core eligibility mandates a minimum credit score of 640 across major bureaus, a maximum debt-to-income (DTI) ratio of 50%, and household income falling within county limits. Crucially, the buyer contribution is limited to the greater of $1,000 or 1% of the purchase price—allowing you to acquire a home with very little cash out of pocket."
+    ],
+    contentEs: [
+      "Ahorrar para el enganche sigue siendo el principal obstáculo para comprar casa en Chicago y el condado de Cook. La Autoridad de Desarrollo de Vivienda de Illinois (IHDA) ofrece programas estructurados para cubrir este pago inicial.",
+      "El programa principal, IHDA Access Home, otorga hasta $15,000 (o hasta el 6% del precio de compra) como una segunda hipoteca al 0% de interés diferida, sin mensualidades, que solo se liquida cuando la casa se vende, se refinancia o al cabo de 30 años.",
+      "Si buscas un préstamo condonable, Access Forgivable ofrece hasta el 4% (máximo $6,000) que se perdona mes a mes durante 10 años viviendo en la propiedad. Además, Access Deferred otorga hasta $7,500 y Access Repayable brinda hasta $10,000 al 0% de interés a pagar en 10 años.",
+      "Los requisitos clave exigen un puntaje de crédito mínimo de 640 puntos, una relación deuda-ingreso (DTI) máxima del 50%, y una aportación propia del comprador de tan solo $1,000 o el 1% del precio de compra (la cantidad que sea mayor), permitiéndote adquirir tu hogar con mínimo desembolso personal."
+    ]
+  },
+  {
+    slug: "mortgage-rates-reality-check-chicago-purchasing-power",
+    title: "Navigating Current Mortgage Rates: Buydowns, Price Leverage, & Waiting Costs",
+    titleEs: "Tasas Hipotecarias Actuales: Estrategias de Reducción, Poder de Negociación y Costo de Esperar",
+    excerpt: "Analyzing recent Freddie Mac Primary Mortgage Market Survey data and how temporary 2-1 seller buydowns can reduce your payments by over $400/month.",
+    excerptEs: "Analizando datos recientes de Freddie Mac y cómo negociar concesiones del vendedor para reducir tu tasa de interés en más de $400 al mes.",
+    date: "2026-10-02",
+    readTime: "7 min read",
+    category: "Homeowner Advisory",
+    categoryEs: "Asesoría para Propietarios",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
+    contentEn: [
+      "According to the Freddie Mac Primary Mortgage Market Survey (PMMS), 30-year fixed mortgage rates average around 7.28% and 15-year fixed loans average 6.60%. Many prospective buyers ask whether waiting for rates to drop is a winning financial strategy.",
+      "History shows that whenever interest rates decline significantly, sideline buyers flood back into the Chicago market simultaneously—eroding seller price concessions, driving up bidding wars, and forcing buyers to offer tens of thousands above list price.",
+      "In today's balanced market, smart buyers utilize seller-paid closing concessions to fund a 2-1 temporary buydown. Under this structure, your effective mortgage rate is reduced by 2.0% in year one (e.g., down to 5.28%) and 1.0% in year two (6.28%), saving between $350 and $480 each month during your initial ownership period.",
+      "You date the rate, but you marry the purchase price. Negotiating an advantageous acquisition price on a classic bungalow or suburban home today allows you to refinance when national rate cycles loosen."
+    ],
+    contentEs: [
+      "De acuerdo con los datos oficiales del Primary Mortgage Market Survey de Freddie Mac, las tasas hipotecarias fijas a 30 años promedian 7.28% y a 15 años se ubican en 6.60%. Muchos compradores se preguntan si conviene esperar a que bajen las tasas.",
+      "La historia demuestra que cuando las tasas caen de golpe, miles de compradores regresan al mercado al mismo tiempo, desatando guerras de ofertas ('bidding wars') y eliminando los descuentos que hoy los vendedores están dispuestos a negociar.",
+      "En el mercado actual, la estrategia más inteligente es solicitar concesiones al vendedor para pagar una reducción de tasa temporal 2-1 ('2-1 Buydown'). Con esta fórmula, tu tasa baja 2% el primer año (al 5.28%) y 1% el segundo año (al 6.28%), ahorrándote de $350 a $480 mensuales durante los dos primeros años.",
+      "La tasa se refinancia en el futuro, pero el precio de compra se firma una sola vez. Negociar un precio competitivo hoy con créditos de cierre te protege mejor que competir contra 15 ofertas más adelante."
+    ]
+  },
+  {
+    slug: "investing-cook-county-multi-family-flats-dscr-rules",
+    title: "The Multi-Family Investment Playbook: Underwriting 2-4 Unit Flats in Cook County",
+    titleEs: "Inversión en Inmuebles Multifamiliares: Análisis Numérico de Edificios en Cook County",
+    excerpt: "How investors and house hackers analyze rental cash flows, capital expense reserves, separate utilities, and Cook County building assessments.",
+    excerptEs: "Cómo analizar el flujo de caja, reservas de mantenimiento, medidores independientes y avalúos de edificios de departamentos en Cook County.",
+    date: "2026-09-28",
+    readTime: "9 min read",
+    category: "Investment Strategy",
+    categoryEs: "Estrategia de Inversión",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    contentEn: [
+      "Investing in a Chicago or Cook County multi-unit building requires rigorous financial modeling beyond standard residential comps. Whether evaluating properties in Hegewisch, Berwyn, or Cicero, underwriting begins with operational cash flow.",
+      "The critical distinction in local multi-family stock is utilities: buildings with separate tenant-metered gas (boilers or forced air) and electric panels protect the owner's net operating income (NOI), whereas master-metered heating forces the landlord to absorb severe winter gas bills.",
+      "When sizing debt, lenders evaluate both Debt Service Coverage Ratios (DSCR) and FHA self-sufficiency tests for 3-4 unit properties, requiring net rental proceeds to cover at least 100% of the principal, interest, taxes, and insurance.",
+      "I run full pro forma schedules for investor clients—factoring an 8% vacancy reserve, 10% maintenance and capital expenditure allowance, and accurate Cook County tax trajectory modeling before submitting an acquisition contract."
+    ],
+    contentEs: [
+      "Invertir en un edificio de 2 a 4 departamentos en Chicago o sus suburbios exige un análisis numérico estricto que va más allá de comparar casas unifamiliares. El éxito de la inversión radica en su flujo de caja operativo.",
+      "El punto crítico en los inmuebles locales son los medidores: las propiedades con gas y electricidad independientes para cada unidad protegen tu ingreso neto (NOI), mientras que un sistema central obliga al dueño a absorber las costosas facturas de calefacción de invierno.",
+      "Al tramitar el préstamo, las instituciones bancarias aplican la regla de autosuficiencia y la tasa de cobertura de deuda (DSCR), exigiendo que el 75% del ingreso estimado de las rentas cubra el pago total de la hipoteca, impuestos y seguros.",
+      "Desarrollo proyecciones financieras completas para mis clientes inversionistas, incluyendo 8% de reserva para desocupación y 10% para reparaciones mayores antes de enviar una oferta formal."
+    ]
+  },
+  {
     slug: "hegewisch-chicago-hidden-gem-south-shore-line",
     title: "Hegewisch: Chicago’s Southernmost Neighborhood with Forest Preserves and Commuter Rail",
     titleEs: "Hegewisch: El Vecindario Más al Sur de Chicago con Bosques y Tren Directo al Loop",
